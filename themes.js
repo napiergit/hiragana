@@ -173,6 +173,9 @@ class ThemeManager {
             body.classList.remove('dark-mode');
         }
         
+        // Update dark mode button immediately
+        this.updateDarkModeButton();
+        
         // Remove all theme classes
         body.className = body.className.split(' ').filter(c => 
             !c.startsWith('from-') && 

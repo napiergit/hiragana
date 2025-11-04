@@ -158,6 +158,9 @@ function init() {
     // Initialize theme manager
     themeManager = new ThemeManager();
     setupThemeUI();
+    
+    // Apply theme immediately and log dark mode status
+    console.log(`🎨 Theme: ${themeManager.currentTheme}, Dark mode: ${themeManager.isDarkMode}`);
     themeManager.applyTheme();
     
     // Restore saved progress
@@ -867,30 +870,17 @@ function animateSuccess() {
     }, 500);
 }
 
-// Hide mobile URL bar on interaction
-function hideMobileUrlBar() {
-    // Scroll to hide URL bar on mobile browsers
-    window.scrollTo(0, 1);
-    setTimeout(() => window.scrollTo(0, 0), 0);
-}
-
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     init();
     
-    // Hide URL bar on mobile when user first interacts
-    const hideUrlBarOnce = () => {
-        hideMobileUrlBar();
-        // Remove listeners after first interaction
-        document.removeEventListener('touchstart', hideUrlBarOnce);
-        canvas.removeEventListener('touchstart', hideUrlBarOnce);
+    // Fix viewport height for mobile Safari
+    const setViewportHeight = () => {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
     };
     
-    // Trigger on first touch
-    document.addEventListener('touchstart', hideUrlBarOnce, { passive: true });
-    
-    // Also hide URL bar after a short delay on mobile
-    if (window.innerWidth < 768) {
-        setTimeout(hideMobileUrlBar, 500);
-    }
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', setViewportHeight);
 });

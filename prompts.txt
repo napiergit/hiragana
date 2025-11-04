@@ -27,3 +27,35 @@ HIRAGANA PRACTICE APP - CONVERSATION PROMPTS
 Can you create a file called prompts.txt with all the prompts I gave you
 Can you make the drawing canvas darker in dark mode too please. Don't want my eyes to hurt at night
 The navigating to the next character automatically when drawn close enough does not seem to be working"
+
+7. Stroke Order Improvements:
+"Now the arrows are not even on the canvas at all"
+"ok, that is way better!!! Now, the other thing I was trying say, Can the number circles not cover the character at all. i.e. give the actual character we are drawing some buffer space from the directional indicators"
+"Yeah, so same issue, the stroke order arrows are too long in my opinion. Can you make them way shorter"
+"ok, you got that right eventually! The style is correct now. Now it's just the problem that the arrows are not correct at all. lol. the stroke order and direction is not correct. Can you get better input so it can be more accurate?"
+
+8. Auto-Progression and Validation:
+"ok, the stroke accuracy thing seems to be looking at percentage of total canvas covered, not of the actual character covered and the correct order. If the order is wrong I want the thing to reset itself (i.e. start over) maybe with some nice little indication that a mistake was made"
+"You are being too harsh on the start at the numbered circle thing. The number and the outlined character (aka the shadow) are not always that close together. Give a little more leeway"
+
+9. Progress Bar Redesign:
+"order of characters is not perfect, I want the prgress bar split in 3, with a visible gap (maybe even 3 progress bars all next to each other as though it is one). 46 hiragana first, then dakuten etc in the most common order. make each bar relative size to how many characters there are."
+"Handakuten is not written, it does not seem to fit in because the bar is too small, can you find a way to fit it"
+"Handakuten is not written, it does not seem to fit in because the bar is too small, can you find a way to fit it. I want to actuall;y see the word"
+
+10. Layout and Spacing:
+"ok, the height is now larger than the page. Please ensure everything fits in the screen without scrolling on both desktop and mobile. maybe merge the japanese character, the english character and progress x out of y tag onto one line to make more space. Also, in dark mode, I struggle to see the shadow character, can you create a little more of a contrast for the shadow character"
+"Ok, I want more padding below the buttons on desktop. Maybe make the canvas smaller. the issue is my toolbar gets called to action when i go try get a button."
+"on mobile make the canvas larger to maximise space available."
+
+11. Celebration and Persistence:
+"can you do confetti over the canvas when a character is correct. Also, on refresh, can you remember where the user was in the progress"
+
+12. Dark Mode:
+"hmm, it did not automatically pick up my system wide dark mode"
+
+13. Mobile Safari Issues:
+"ok, on desktop there is still not enough space at the bottom of the screen below the buttons to feel safe. There is dead space above the canvas that can be made smaller. On mobile, I'm getting an interesting problem where I can't see the buttons when the url section is showing, and it seems to be showing automatically. Is there any way to hide the url bar when I have started interacting with the app. jk, I know there is because i just tested on another site"
+"also give a little more padding space below buttons on mobile"
+"can you make the brush stroke a little thicker too please"
+"nah, on safari the mobile changes i asked for are not working. also update prompts.txt with all my other prompts"
