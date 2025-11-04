@@ -1001,5 +1001,12 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
     
     // Scroll slightly to hide Safari URL bar
-    setTimeout(() => window.scrollTo(0, 1), 0);
+    setTimeout(() => {
+        window.scrollTo(0, 1);
+    }, 100);
+    
+    // Also scroll on first touch
+    document.addEventListener('touchstart', () => {
+        window.scrollTo(0, 1);
+    }, { once: true, passive: true });
 });
