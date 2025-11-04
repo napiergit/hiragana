@@ -1000,10 +1000,12 @@ function animateSuccess() {
 document.addEventListener('DOMContentLoaded', () => {
     init();
     
-    // Scroll slightly to hide Safari URL bar
-    setTimeout(() => {
-        window.scrollTo(0, 1);
-    }, 100);
+    // Trigger scroll to hide Safari URL bar
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            window.scrollTo(0, 1);
+        }, 0);
+    });
     
     // Also scroll on first touch
     document.addEventListener('touchstart', () => {
