@@ -1,54 +1,54 @@
 // Hiragana characters organized by type
-// Section 1: Basic Hiragana (46 characters)
+// Section 1: Basic Hiragana (46 characters) - iOS keyboard order (a, e, i, o, u)
 const basicHiragana = [
     // Vowels
     { char: 'あ', romaji: 'a' },
-    { char: 'い', romaji: 'i' },
-    { char: 'う', romaji: 'u' },
     { char: 'え', romaji: 'e' },
+    { char: 'い', romaji: 'i' },
     { char: 'お', romaji: 'o' },
+    { char: 'う', romaji: 'u' },
     
     // K row
     { char: 'か', romaji: 'ka' },
-    { char: 'き', romaji: 'ki' },
-    { char: 'く', romaji: 'ku' },
     { char: 'け', romaji: 'ke' },
+    { char: 'き', romaji: 'ki' },
     { char: 'こ', romaji: 'ko' },
+    { char: 'く', romaji: 'ku' },
     
     // S row
     { char: 'さ', romaji: 'sa' },
-    { char: 'し', romaji: 'shi' },
-    { char: 'す', romaji: 'su' },
     { char: 'せ', romaji: 'se' },
+    { char: 'し', romaji: 'shi' },
     { char: 'そ', romaji: 'so' },
+    { char: 'す', romaji: 'su' },
     
     // T row
     { char: 'た', romaji: 'ta' },
-    { char: 'ち', romaji: 'chi' },
-    { char: 'つ', romaji: 'tsu' },
     { char: 'て', romaji: 'te' },
+    { char: 'ち', romaji: 'chi' },
     { char: 'と', romaji: 'to' },
+    { char: 'つ', romaji: 'tsu' },
     
     // N row
     { char: 'な', romaji: 'na' },
-    { char: 'に', romaji: 'ni' },
-    { char: 'ぬ', romaji: 'nu' },
     { char: 'ね', romaji: 'ne' },
+    { char: 'に', romaji: 'ni' },
     { char: 'の', romaji: 'no' },
+    { char: 'ぬ', romaji: 'nu' },
     
     // H row
     { char: 'は', romaji: 'ha' },
-    { char: 'ひ', romaji: 'hi' },
-    { char: 'ふ', romaji: 'fu' },
     { char: 'へ', romaji: 'he' },
+    { char: 'ひ', romaji: 'hi' },
     { char: 'ほ', romaji: 'ho' },
+    { char: 'ふ', romaji: 'fu' },
     
     // M row
     { char: 'ま', romaji: 'ma' },
-    { char: 'み', romaji: 'mi' },
-    { char: 'む', romaji: 'mu' },
     { char: 'め', romaji: 'me' },
+    { char: 'み', romaji: 'mi' },
     { char: 'も', romaji: 'mo' },
+    { char: 'む', romaji: 'mu' },
     
     // Y row
     { char: 'や', romaji: 'ya' },
@@ -57,10 +57,10 @@ const basicHiragana = [
     
     // R row
     { char: 'ら', romaji: 'ra' },
-    { char: 'り', romaji: 'ri' },
-    { char: 'る', romaji: 'ru' },
     { char: 'れ', romaji: 're' },
+    { char: 'り', romaji: 'ri' },
     { char: 'ろ', romaji: 'ro' },
+    { char: 'る', romaji: 'ru' },
     
     // W row
     { char: 'わ', romaji: 'wa' },
@@ -70,44 +70,44 @@ const basicHiragana = [
     { char: 'ん', romaji: 'n' }
 ];
 
-// Section 2: Dakuten (20 characters)
+// Section 2: Dakuten (20 characters) - iOS keyboard order (a, e, i, o, u)
 const dakutenCharacters = [
     // G row
     { char: 'が', romaji: 'ga' },
-    { char: 'ぎ', romaji: 'gi' },
-    { char: 'ぐ', romaji: 'gu' },
     { char: 'げ', romaji: 'ge' },
+    { char: 'ぎ', romaji: 'gi' },
     { char: 'ご', romaji: 'go' },
+    { char: 'ぐ', romaji: 'gu' },
     
     // Z row
     { char: 'ざ', romaji: 'za' },
-    { char: 'じ', romaji: 'ji' },
-    { char: 'ず', romaji: 'zu' },
     { char: 'ぜ', romaji: 'ze' },
+    { char: 'じ', romaji: 'ji' },
     { char: 'ぞ', romaji: 'zo' },
+    { char: 'ず', romaji: 'zu' },
     
     // D row
     { char: 'だ', romaji: 'da' },
-    { char: 'ぢ', romaji: 'di' },
-    { char: 'づ', romaji: 'du' },
     { char: 'で', romaji: 'de' },
+    { char: 'ぢ', romaji: 'di' },
     { char: 'ど', romaji: 'do' },
+    { char: 'づ', romaji: 'du' },
     
     // B row
     { char: 'ば', romaji: 'ba' },
-    { char: 'び', romaji: 'bi' },
-    { char: 'ぶ', romaji: 'bu' },
     { char: 'べ', romaji: 'be' },
-    { char: 'ぼ', romaji: 'bo' }
+    { char: 'び', romaji: 'bi' },
+    { char: 'ぼ', romaji: 'bo' },
+    { char: 'ぶ', romaji: 'bu' }
 ];
 
-// Section 3: Handakuten (5 characters)
+// Section 3: Handakuten (5 characters) - iOS keyboard order (a, e, i, o, u)
 const handakutenCharacters = [
     { char: 'ぱ', romaji: 'pa' },
-    { char: 'ぴ', romaji: 'pi' },
-    { char: 'ぷ', romaji: 'pu' },
     { char: 'ぺ', romaji: 'pe' },
-    { char: 'ぽ', romaji: 'po' }
+    { char: 'ぴ', romaji: 'pi' },
+    { char: 'ぽ', romaji: 'po' },
+    { char: 'ぷ', romaji: 'pu' }
 ];
 
 // Combined array
@@ -726,6 +726,70 @@ function previousCharacter() {
     }
 }
 
+// Update current position indicator on progress bar
+function updateCurrentPositionIndicator(container, progressPercent, charIndex) {
+    const char = hiraganaCharacters[charIndex];
+    let indicator = container.querySelector('.current-position-indicator');
+    
+    if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.className = 'current-position-indicator';
+        indicator.style.cssText = `
+            position: absolute;
+            top: -35px;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            white-space: nowrap;
+        `;
+        
+        // Add arrow pointing down
+        const arrow = document.createElement('div');
+        arrow.style.cssText = `
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #8b5cf6;
+        `;
+        indicator.appendChild(arrow);
+        
+        container.style.position = 'relative';
+        container.appendChild(indicator);
+    }
+    
+    indicator.textContent = `${char.char} (${char.romaji})`;
+    indicator.style.left = `${progressPercent}%`;
+    
+    // Re-add arrow if it was removed
+    if (!indicator.querySelector('div')) {
+        const arrow = document.createElement('div');
+        arrow.style.cssText = `
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #8b5cf6;
+        `;
+        indicator.appendChild(arrow);
+    }
+}
+
 // Update the display with current character
 function updateDisplay() {
     const current = hiraganaCharacters[currentIndex];
@@ -751,6 +815,8 @@ function updateDisplay() {
     // Update each progress bar
     sections.forEach((section, idx) => {
         const barEl = document.getElementById(`progressBar${idx + 1}`);
+        const containerEl = document.getElementById(`progressBar${idx + 1}Container`);
+        
         if (idx < sectionIndex) {
             // Completed section
             barEl.style.width = '100%';
@@ -759,6 +825,9 @@ function updateDisplay() {
             const posInSection = currentIndex - section.start + 1;
             const progress = (posInSection / section.count) * 100;
             barEl.style.width = progress + '%';
+            
+            // Show current position indicator on active bar
+            updateCurrentPositionIndicator(containerEl, progress, currentIndex);
         } else {
             // Future section
             barEl.style.width = '0%';
