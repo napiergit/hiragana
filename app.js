@@ -999,6 +999,4 @@ function animateSuccess() {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     init();
-    
-    // Nothing needed - layout adapts to available space
 });

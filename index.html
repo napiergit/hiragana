@@ -27,11 +27,18 @@
             height: 100%;
             overflow: hidden;
             font-family: 'Noto Sans JP', sans-serif;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+        }
+        
+        /* Mobile Safari: Use dynamic viewport height */
+        @media (max-width: 768px) {
+            @supports (height: 100dvh) {
+                body {
+                    height: 100dvh;
+                }
+                .app-container {
+                    height: 100dvh;
+                }
+            }
         }
         
         #drawingCanvas {
