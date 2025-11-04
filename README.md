@@ -9,8 +9,11 @@ A beautiful, interactive web application for learning and practicing Japanese hi
 - 🎯 **Auto-Progression** - Automatically moves to next character when you've drawn enough
 - ✓ **Success Detection** - Shows checkmark when drawing is complete
 - 📱 **No-Scroll Layout** - Perfectly fits on any screen without scrolling
+- 🎨 **5 Beautiful Themes** - Sunset, Ocean, Forest, Lavender, and Cherry Blossom
+- 🌙 **Dark Mode** - Toggle between light and dark modes with persistent settings
+- 💾 **LocalStorage Memory** - Theme and dark mode preferences saved locally
 - 🎨 **Modern UI** - Beautiful gradient design with smooth animations
-- 📊 **Progress Tracking** - Visual progress bar showing your learning journey
+- 📊 **Progress Tracking** - Clickable progress bar to jump to any character
 - 🔤 **Complete Hiragana Set** - All 71 characters including dakuten (゛) and handakuten (゜)
 - 🎯 **Reference Overlay** - Faded character guide to help you draw correctly
 - ⌨️ **Keyboard Shortcuts** - Arrow keys to navigate, 'C' to clear
@@ -19,11 +22,14 @@ A beautiful, interactive web application for learning and practicing Japanese hi
 ## How to Use
 
 1. **Draw** - Use your mouse or finger to draw the displayed hiragana character
-2. **Follow Stroke Order** - Red numbered arrows show the correct stroke sequence
+2. **Follow Stroke Order** - Numbered arrows show the correct stroke sequence
 3. **Auto-Progress** - When you've drawn enough, a checkmark appears and it auto-advances
 4. **Clear** - Click the "Clear" button to erase and try again
 5. **Navigate** - Use "Next" and "Previous" buttons to move between characters
-6. **Toggle Stroke Order** - Use the checkbox to show/hide stroke order guides
+6. **Jump to Character** - Click anywhere on the progress bar to skip to that character
+7. **Change Theme** - Click the 🎨 button to choose from 5 beautiful color schemes
+8. **Toggle Dark Mode** - Click the 🌙/☀️ button to switch between light and dark modes
+9. **Toggle Stroke Order** - Use the checkbox to show/hide stroke order guides
 
 ## Keyboard Shortcuts
 
@@ -70,12 +76,24 @@ chmod +x deploy.sh
 ./deploy.sh
 ```
 
+## Themes
+
+Choose from 5 beautiful color schemes:
+- 🌅 **Sunset** - Warm oranges and pinks
+- 🌊 **Ocean** - Cool cyans and blues
+- 🌲 **Forest** - Fresh greens and teals
+- 💜 **Lavender** - Purple and pink gradients (default)
+- 🌸 **Cherry** - Soft rose and fuchsia tones
+
+Each theme has both light and dark mode variants. Your preferences are automatically saved to localStorage and persist across sessions.
+
 ## Technologies Used
 
 - **HTML5 Canvas** - For drawing functionality
 - **Vanilla JavaScript** - No frameworks, pure JS
 - **Tailwind CSS** - Modern, responsive styling via CDN
 - **Google Fonts** - Noto Sans JP for authentic Japanese typography
+- **LocalStorage API** - For persistent theme preferences
 
 ## Browser Support
 

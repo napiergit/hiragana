@@ -1,0 +1,29 @@
+HIRAGANA PRACTICE APP - CONVERSATION PROMPTS
+==============================================
+
+1. Initial Request:
+"ok, I want to create a web app from scratch called hiragana (folder created), where all the hiragana characters are shown, one after the next, where a user can draw with either a mouse on desktop or with their finger on mobile to complete the character and then move on to the next. I would like this to deploy to github pages. go wild"
+
+2. First Iteration Feedback:
+"very good first iteration. A couple of changes
+
+1. I'd like arrows with numbers showing the order of brush strokes for each character.
+2. Currently the page does not fit css wise. I want to ensure there is no scroll on desktop or mobile and also that everything fits nicely (focus on enough space to draw the character.
+3. If the character is completed successfully enough you can show a check mark and auto move on to the next one.
+4. I want it in a, e, i, o, u order, then the k's etc. Like how the keyboard is layed out on the mobile keyboard
+5. Can you add the dakuten etc too please"
+
+3. Deploy Script Update:
+"ok, your deploy script is asking for username and password for git. Can it just use my ssh key?"
+
+4. Progress Bar Enhancement:
+"I would like to be able to skip to anywhere in the progressbar"
+
+5. Theme System Request:
+"Can I choose some colour schemes or themes for the whole site which changes the colour of the backgrounds and the strokes. Maybe like 5 cool themes, and a light and dark mode button which is remembered locally on both web and mobile web"
+
+6. Final Refinements:
+"The stroke arrows are not quite correct order, and also they are over the drawing, can you make them just small indicators that don't cover the character I want to draw at all.
+Can you create a file called prompts.txt with all the prompts I gave you
+Can you make the drawing canvas darker in dark mode too please. Don't want my eyes to hurt at night
+The navigating to the next character automatically when drawn close enough does not seem to be working"

@@ -141,6 +141,13 @@ class ThemeManager {
         const colors = this.getColors();
         const body = document.body;
         
+        // Add/remove dark-mode class
+        if (this.isDarkMode) {
+            body.classList.add('dark-mode');
+        } else {
+            body.classList.remove('dark-mode');
+        }
+        
         // Remove all theme classes
         body.className = body.className.split(' ').filter(c => 
             !c.startsWith('from-') && 
@@ -152,13 +159,17 @@ class ThemeManager {
         const gradientClasses = colors.bg.split(' ');
         body.classList.add(...gradientClasses);
         
-        // Update progress bar
-        const progressBar = document.getElementById('progressBar');
-        progressBar.className = progressBar.className.split(' ').filter(c => 
-            !c.startsWith('from-') && 
-            !c.startsWith('to-')
-        ).join(' ');
-        progressBar.classList.add(...colors.primary.split(' '));
+        // Update progress bars (all 3)
+        for (let i = 1; i <= 3; i++) {
+            const progressBar = document.getElementById(`progressBar${i}`);
+            if (progressBar) {
+                progressBar.className = progressBar.className.split(' ').filter(c => 
+                    !c.startsWith('from-') && 
+                    !c.startsWith('to-')
+                ).join(' ');
+                progressBar.classList.add(...colors.primary.split(' '));
+            }
+        }
         
         // Update next button
         const nextBtn = document.getElementById('nextBtn');
@@ -188,6 +199,43 @@ class ThemeManager {
                 !c.startsWith('text-')
             ).join(' ');
             header.classList.add(colors.text);
+        }
+        
+        // Update all text elements for dark mode
+        const progressText = document.getElementById('progressText');
+        if (progressText) {
+            progressText.className = progressText.className.split(' ').filter(c => 
+                !c.startsWith('text-')
+            ).join(' ');
+            progressText.classList.add('text-xs', 'font-semibold', colors.text.replace('text-', 'text-').replace('-900', '-600').replace('-100', '-200'));
+        }
+        
+        const progressLabel = document.querySelector('.text-gray-700');
+        if (progressLabel && this.isDarkMode) {
+            progressLabel.classList.remove('text-gray-700');
+            progressLabel.classList.add('text-gray-300');
+        } else if (progressLabel && !this.isDarkMode) {
+            progressLabel.classList.remove('text-gray-300');
+            progressLabel.classList.add('text-gray-700');
+        }
+        
+        // Update romaji display
+        const romajiDisplay = document.getElementById('romajiDisplay');
+        if (romajiDisplay) {
+            romajiDisplay.className = romajiDisplay.className.split(' ').filter(c => 
+                !c.startsWith('text-')
+            ).join(' ');
+            romajiDisplay.classList.add('text-xl', 'font-semibold', 'mb-1', this.isDarkMode ? 'text-gray-200' : 'text-gray-700');
+        }
+        
+        // Update stroke order label
+        const strokeLabel = document.querySelector('.text-xs.font-semibold.text-gray-700');
+        if (strokeLabel && this.isDarkMode) {
+            strokeLabel.classList.remove('text-gray-700');
+            strokeLabel.classList.add('text-gray-300');
+        } else if (strokeLabel && !this.isDarkMode) {
+            strokeLabel.classList.remove('text-gray-300');
+            strokeLabel.classList.add('text-gray-700');
         }
         
         // Update canvas border
@@ -225,20 +273,17 @@ class ThemeManager {
         if (oldStyle) oldStyle.remove();
         
         style.textContent = `
-            .stroke-arrow {
-                stroke: ${strokeColor} !important;
-            }
             .stroke-number {
-                background: ${strokeColor} !important;
+                background-color: ${strokeColor} !important;
             }
         `;
         
         document.head.appendChild(style);
         
-        // Update arrow fills in SVG
-        const arrows = document.querySelectorAll('#strokeOrderSvg polygon');
-        arrows.forEach(arrow => {
-            arrow.setAttribute('fill', strokeColor);
+        // Update existing stroke numbers
+        const numbers = document.querySelectorAll('.stroke-number');
+        numbers.forEach(num => {
+            num.style.backgroundColor = strokeColor;
         });
     }
     
