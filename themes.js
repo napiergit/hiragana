@@ -110,6 +110,10 @@ const themes = {
 // Theme manager
 class ThemeManager {
     constructor() {
+        // Set defaults first
+        this.currentTheme = 'lavender';
+        this.isDarkMode = false;
+        
         // Load saved preferences
         const savedTheme = localStorage.getItem('hiragana-theme');
         const savedDarkMode = localStorage.getItem('hiragana-dark-mode');

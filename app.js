@@ -1000,27 +1000,5 @@ function animateSuccess() {
 document.addEventListener('DOMContentLoaded', () => {
     init();
     
-    // Aggressively hide Safari URL bar
-    const hideAddressBar = () => {
-        if (window.pageYOffset === 0) {
-            window.scrollTo(0, 1);
-        }
-    };
-    
-    // Try multiple times
-    setTimeout(hideAddressBar, 0);
-    setTimeout(hideAddressBar, 100);
-    setTimeout(hideAddressBar, 500);
-    setTimeout(hideAddressBar, 1000);
-    
-    // On any touch
-    document.addEventListener('touchstart', hideAddressBar, { once: true, passive: true });
-    
-    // On window load
-    window.addEventListener('load', hideAddressBar);
-    
-    // On orientation change
-    window.addEventListener('orientationchange', () => {
-        setTimeout(hideAddressBar, 100);
-    });
+    // That's it - no URL bar tricks, just a clean working app
 });
