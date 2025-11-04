@@ -5,20 +5,25 @@ A beautiful, interactive web application for learning and practicing Japanese hi
 ## Features
 
 - ✏️ **Interactive Drawing Canvas** - Draw characters with mouse (desktop) or touch (mobile)
-- 📱 **Fully Responsive** - Works seamlessly on desktop, tablet, and mobile devices
+- 🔢 **Stroke Order Indicators** - Numbered arrows show the correct stroke sequence
+- 🎯 **Auto-Progression** - Automatically moves to next character when you've drawn enough
+- ✓ **Success Detection** - Shows checkmark when drawing is complete
+- 📱 **No-Scroll Layout** - Perfectly fits on any screen without scrolling
 - 🎨 **Modern UI** - Beautiful gradient design with smooth animations
 - 📊 **Progress Tracking** - Visual progress bar showing your learning journey
-- 🔤 **Complete Hiragana Set** - All 46 basic hiragana characters
+- 🔤 **Complete Hiragana Set** - All 71 characters including dakuten (゛) and handakuten (゜)
 - 🎯 **Reference Overlay** - Faded character guide to help you draw correctly
 - ⌨️ **Keyboard Shortcuts** - Arrow keys to navigate, 'C' to clear
-- 🎨 **Adjustable Brush Size** - Customize your drawing experience
+- 📱 **Mobile-Optimized Order** - Characters arranged like Japanese mobile keyboard (a,e,i,o,u pattern)
 
 ## How to Use
 
 1. **Draw** - Use your mouse or finger to draw the displayed hiragana character
-2. **Clear** - Click the "Clear" button to erase and try again
-3. **Navigate** - Use "Next" and "Previous" buttons to move between characters
-4. **Adjust** - Change the brush size with the slider for your preference
+2. **Follow Stroke Order** - Red numbered arrows show the correct stroke sequence
+3. **Auto-Progress** - When you've drawn enough, a checkmark appears and it auto-advances
+4. **Clear** - Click the "Clear" button to erase and try again
+5. **Navigate** - Use "Next" and "Previous" buttons to move between characters
+6. **Toggle Stroke Order** - Use the checkbox to show/hide stroke order guides
 
 ## Keyboard Shortcuts
 

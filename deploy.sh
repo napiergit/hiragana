@@ -27,8 +27,8 @@ if git remote | grep -q origin; then
     echo "✅ Remote 'origin' already configured"
 else
     echo ""
-    echo "❓ Please enter your GitHub repository URL:"
-    echo "   (e.g., https://github.com/username/hiragana.git)"
+    echo "❓ Please enter your GitHub repository (SSH format):"
+    echo "   (e.g., git@github.com:username/hiragana.git)"
     read -p "Repository URL: " repo_url
     
     if [ -z "$repo_url" ]; then
@@ -55,6 +55,8 @@ echo "1. Go to your GitHub repository"
 echo "2. Click on 'Settings' → 'Pages'"
 echo "3. Under 'Source', select '$current_branch' branch"
 echo "4. Click 'Save'"
-echo "5. Your site will be live at: https://yourusername.github.io/repository-name/"
+echo "5. Your site will be live at: https://username.github.io/repository-name/"
+echo ""
+echo "💡 Note: This script uses SSH authentication with your SSH key."
 echo ""
 echo "🎉 Happy learning hiragana!"
