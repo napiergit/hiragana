@@ -999,4 +999,7 @@ function animateSuccess() {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     init();
+    
+    // Scroll slightly to hide Safari URL bar
+    setTimeout(() => window.scrollTo(0, 1), 0);
 });
