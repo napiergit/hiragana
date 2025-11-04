@@ -23,16 +23,24 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            min-height: 100vh;
+            height: 100%;
             font-family: 'Noto Sans JP', sans-serif;
             overflow-x: hidden;
-            overflow-y: auto;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        body::after {
+            content: '';
+            display: block;
+            height: 1px;
         }
         
         .app-container {
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
         
         #drawingCanvas {
