@@ -253,54 +253,111 @@ function setupEventListeners() {
         updateStrokeOrder();
     });
     
-    // Progress bar click handlers for each section
-    document.getElementById('progressBar1Container').addEventListener('click', (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const percentage = clickX / rect.width;
-        const targetIndex = Math.floor(percentage * sections[0].count);
-        const newIndex = Math.max(0, Math.min(sections[0].count - 1, targetIndex));
+    // Progress bar interaction handlers for each section
+    const setupProgressBarInteraction = (containerId, sectionIdx) => {
+        const container = document.getElementById(containerId);
+        const section = sections[sectionIdx];
         
-        if (newIndex !== currentIndex) {
-            currentIndex = newIndex;
-            localStorage.setItem('hiragana-progress', currentIndex);
-            updateDisplay();
-            updateStrokeOrder();
-            clearCanvas();
-        }
-    });
+        const jumpToPosition = (e) => {
+            const rect = container.getBoundingClientRect();
+            const clickX = (e.clientX || e.touches[0].clientX) - rect.left;
+            const percentage = Math.max(0, Math.min(1, clickX / rect.width));
+            const targetIndex = section.start + Math.floor(percentage * section.count);
+            const newIndex = Math.max(section.start, Math.min(section.start + section.count - 1, targetIndex));
+            
+            if (newIndex !== currentIndex) {
+                currentIndex = newIndex;
+                localStorage.setItem('hiragana-progress', currentIndex);
+                updateDisplay();
+                updateStrokeOrder();
+                clearCanvas();
+            }
+        };
+        
+        const showTooltip = (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const percentage = Math.max(0, Math.min(1, x / rect.width));
+            const targetIndex = section.start + Math.floor(percentage * section.count);
+            const charIndex = Math.max(section.start, Math.min(section.start + section.count - 1, targetIndex));
+            const char = hiraganaCharacters[charIndex];
+            
+            let tooltip = document.getElementById('progressTooltip');
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.id = 'progressTooltip';
+                tooltip.className = 'fixed bg-gray-900 text-white px-3 py-2 rounded-lg text-sm font-bold pointer-events-none z-50 shadow-lg';
+                document.body.appendChild(tooltip);
+            }
+            
+            tooltip.textContent = `${char.char} (${char.romaji})`;
+            tooltip.style.left = (e.clientX || e.touches[0].clientX) + 'px';
+            tooltip.style.top = (rect.top - 40) + 'px';
+            tooltip.style.transform = 'translateX(-50%)';
+            tooltip.style.display = 'block';
+        };
+        
+        const hideTooltip = () => {
+            const tooltip = document.getElementById('progressTooltip');
+            if (tooltip) tooltip.style.display = 'none';
+        };
+        
+        // Click/tap to jump
+        container.addEventListener('click', jumpToPosition);
+        container.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            jumpToPosition(e);
+        });
+        
+        // Drag/slide functionality
+        let isDragging = false;
+        
+        container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            showTooltip(e);
+            jumpToPosition(e);
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging && container.matches(':hover')) {
+                showTooltip(e);
+                jumpToPosition(e);
+            }
+        });
+        
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                hideTooltip();
+            }
+        });
+        
+        // Touch drag
+        container.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            showTooltip(e);
+            jumpToPosition(e);
+        });
+        
+        container.addEventListener('touchend', hideTooltip);
+        
+        // Hover tooltip on desktop
+        container.addEventListener('mouseenter', (e) => {
+            if (!isDragging) showTooltip(e);
+        });
+        
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) showTooltip(e);
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            if (!isDragging) hideTooltip();
+        });
+    };
     
-    document.getElementById('progressBar2Container').addEventListener('click', (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const percentage = clickX / rect.width;
-        const targetIndex = sections[1].start + Math.floor(percentage * sections[1].count);
-        const newIndex = Math.max(sections[1].start, Math.min(sections[1].start + sections[1].count - 1, targetIndex));
-        
-        if (newIndex !== currentIndex) {
-            currentIndex = newIndex;
-            localStorage.setItem('hiragana-progress', currentIndex);
-            updateDisplay();
-            updateStrokeOrder();
-            clearCanvas();
-        }
-    });
-    
-    document.getElementById('progressBar3Container').addEventListener('click', (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const percentage = clickX / rect.width;
-        const targetIndex = sections[2].start + Math.floor(percentage * sections[2].count);
-        const newIndex = Math.max(sections[2].start, Math.min(sections[2].start + sections[2].count - 1, targetIndex));
-        
-        if (newIndex !== currentIndex) {
-            currentIndex = newIndex;
-            localStorage.setItem('hiragana-progress', currentIndex);
-            updateDisplay();
-            updateStrokeOrder();
-            clearCanvas();
-        }
-    });
+    setupProgressBarInteraction('progressBar1Container', 0);
+    setupProgressBarInteraction('progressBar2Container', 1);
+    setupProgressBarInteraction('progressBar3Container', 2);
     
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
@@ -883,4 +940,40 @@ document.addEventListener('DOMContentLoaded', () => {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     window.addEventListener('orientationchange', setViewportHeight);
+    
+    // Enable pull-to-refresh on mobile Safari
+    // Prevent default pull-to-refresh on canvas to allow drawing
+    const canvas = document.getElementById('drawingCanvas');
+    if (canvas) {
+        canvas.addEventListener('touchstart', (e) => {
+            // Allow drawing on canvas
+        }, { passive: true });
+    }
+    
+    // Allow pull-to-refresh on header and controls
+    const header = document.querySelector('header');
+    const controls = document.querySelector('.flex.flex-wrap.gap-2');
+    
+    [header, controls].forEach(element => {
+        if (element) {
+            element.addEventListener('touchmove', (e) => {
+                // Allow native pull-to-refresh behavior
+            }, { passive: true });
+        }
+    });
+    
+    // Force Safari to show/hide URL bar properly
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        // Minimal scroll to trigger Safari's minimal-ui
+        window.scrollTo(0, 0);
+        
+        // Listen for scroll events to manage URL bar
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY !== lastScrollY) {
+                lastScrollY = currentScrollY;
+            }
+        }, { passive: true });
+    }
 });
