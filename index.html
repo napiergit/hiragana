@@ -17,7 +17,6 @@
         
         html {
             height: 100%;
-            height: -webkit-fill-available;
             overflow: hidden;
         }
         
@@ -25,24 +24,14 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            min-height: 100%;
-            /* Safari mobile viewport fix */
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-            overflow-x: hidden;
-            overflow-y: auto;
+            height: 100%;
+            overflow: hidden;
             font-family: 'Noto Sans JP', sans-serif;
-            /* Enable pull-to-refresh on mobile */
-            overscroll-behavior-y: contain;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                /* Make slightly taller than viewport on mobile to enable scrolling */
-                min-height: calc(100vh + 1px);
-                min-height: calc(var(--vh, 1vh) * 100 + 1px);
-            }
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
         
         #drawingCanvas {
@@ -134,16 +123,9 @@
         .app-container {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            min-height: calc(var(--vh, 1vh) * 100);
-            width: 100vw;
-        }
-        
-        @media (max-width: 768px) {
-            .app-container {
-                min-height: calc(100vh + 1px);
-                min-height: calc(var(--vh, 1vh) * 100 + 1px);
-            }
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
         }
         
         .theme-text {
