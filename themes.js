@@ -110,8 +110,33 @@ const themes = {
 // Theme manager
 class ThemeManager {
     constructor() {
-        this.currentTheme = localStorage.getItem('hiragana-theme') || 'lavender';
-        this.isDarkMode = localStorage.getItem('hiragana-dark-mode') === 'true';
+        // Load saved preferences
+        const savedTheme = localStorage.getItem('hiragana-theme');
+        const savedDarkMode = localStorage.getItem('hiragana-dark-mode');
+        
+        if (savedTheme) {
+            this.currentTheme = savedTheme;
+        }
+        
+        if (savedDarkMode !== null) {
+            this.isDarkMode = savedDarkMode === 'true';
+        } else {
+            // Auto-detect system dark mode preference
+            this.isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            console.log(`🌓 Auto-detected system dark mode: ${this.isDarkMode}`);
+        }
+        
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                // Only auto-switch if user hasn't manually set a preference
+                if (localStorage.getItem('hiragana-dark-mode') === null) {
+                    this.isDarkMode = e.matches;
+                    this.applyTheme();
+                    console.log(`🌓 System dark mode changed: ${this.isDarkMode}`);
+                }
+            });
+        }
     }
     
     getTheme() {
