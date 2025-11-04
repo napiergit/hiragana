@@ -1031,17 +1031,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Force Safari to show/hide URL bar properly
+    // Force Safari to hide URL bar on mobile
     if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-        // Minimal scroll to trigger Safari's minimal-ui
-        window.scrollTo(0, 0);
+        // Scroll down slightly to hide URL bar
+        setTimeout(() => {
+            window.scrollTo(0, 1);
+        }, 100);
         
-        // Listen for scroll events to manage URL bar
-        let lastScrollY = window.scrollY;
+        // Hide URL bar on any touch interaction
+        let hasScrolled = false;
+        const hideUrlBar = () => {
+            if (!hasScrolled) {
+                window.scrollTo(0, 1);
+                hasScrolled = true;
+            }
+        };
+        
+        document.addEventListener('touchstart', hideUrlBar, { once: true, passive: true });
+        
+        // Prevent scrolling back to top
         window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY !== lastScrollY) {
-                lastScrollY = currentScrollY;
+            if (window.scrollY === 0) {
+                window.scrollTo(0, 1);
             }
         }, { passive: true });
     }
