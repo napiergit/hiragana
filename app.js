@@ -1000,15 +1000,27 @@ function animateSuccess() {
 document.addEventListener('DOMContentLoaded', () => {
     init();
     
-    // Trigger scroll to hide Safari URL bar
-    window.addEventListener('load', () => {
-        setTimeout(() => {
+    // Aggressively hide Safari URL bar
+    const hideAddressBar = () => {
+        if (window.pageYOffset === 0) {
             window.scrollTo(0, 1);
-        }, 0);
-    });
+        }
+    };
     
-    // Also scroll on first touch
-    document.addEventListener('touchstart', () => {
-        window.scrollTo(0, 1);
-    }, { once: true, passive: true });
+    // Try multiple times
+    setTimeout(hideAddressBar, 0);
+    setTimeout(hideAddressBar, 100);
+    setTimeout(hideAddressBar, 500);
+    setTimeout(hideAddressBar, 1000);
+    
+    // On any touch
+    document.addEventListener('touchstart', hideAddressBar, { once: true, passive: true });
+    
+    // On window load
+    window.addEventListener('load', hideAddressBar);
+    
+    // On orientation change
+    window.addEventListener('orientationchange', () => {
+        setTimeout(hideAddressBar, 100);
+    });
 });
