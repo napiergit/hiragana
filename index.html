@@ -29,15 +29,15 @@
             font-family: 'Noto Sans JP', sans-serif;
         }
         
-        /* Mobile Safari: Use dynamic viewport height */
+        /* Mobile: Use dynamic viewport height to handle URL bar */
         @media (max-width: 768px) {
-            @supports (height: 100dvh) {
-                body {
-                    height: 100dvh;
-                }
-                .app-container {
-                    height: 100dvh;
-                }
+            body {
+                height: 100dvh;
+                height: 100vh; /* Fallback for older browsers */
+            }
+            .app-container {
+                height: 100dvh;
+                height: 100vh; /* Fallback for older browsers */
             }
         }
         
@@ -155,11 +155,11 @@
         <!-- Header -->
         <header class="text-center py-1 px-4 fade-in relative">
             <!-- Theme Controls -->
-            <div class="absolute top-3 right-3 flex gap-2">
-                <button id="darkModeBtn" class="w-8 h-8 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all flex items-center justify-center text-lg" title="Toggle Dark Mode">
+            <div class="absolute top-1 right-1 md:top-3 md:right-3 flex gap-2">
+                <button id="darkModeBtn" class="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all flex items-center justify-center text-base md:text-lg" title="Toggle Dark Mode">
                     🌙
                 </button>
-                <button id="themeMenuBtn" class="w-8 h-8 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all flex items-center justify-center text-lg" title="Change Theme">
+                <button id="themeMenuBtn" class="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all flex items-center justify-center text-base md:text-lg" title="Change Theme">
                     🎨
                 </button>
             </div>
