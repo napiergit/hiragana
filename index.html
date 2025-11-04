@@ -43,6 +43,13 @@
             overflow: hidden;
         }
         
+        /* Mobile: Make container taller to enable scrolling */
+        @media (max-width: 768px) {
+            .app-container {
+                min-height: calc(100vh + 60px);
+            }
+        }
+        
         #drawingCanvas {
             touch-action: none;
             cursor: crosshair;
