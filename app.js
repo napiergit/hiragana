@@ -124,7 +124,7 @@ const sections = [
 let canvas, ctx;
 let isDrawing = false;
 let currentIndex = 0;
-let strokeWidth = 8;
+let strokeWidth = 12;
 let drawnPixels = new Set();
 let showStrokeOrder = true;
 let autoProgressTimeout = null;
@@ -867,9 +867,30 @@ function animateSuccess() {
     }, 500);
 }
 
-// Initialize when DOM is loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
+// Hide mobile URL bar on interaction
+function hideMobileUrlBar() {
+    // Scroll to hide URL bar on mobile browsers
+    window.scrollTo(0, 1);
+    setTimeout(() => window.scrollTo(0, 0), 0);
 }
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    init();
+    
+    // Hide URL bar on mobile when user first interacts
+    const hideUrlBarOnce = () => {
+        hideMobileUrlBar();
+        // Remove listeners after first interaction
+        document.removeEventListener('touchstart', hideUrlBarOnce);
+        canvas.removeEventListener('touchstart', hideUrlBarOnce);
+    };
+    
+    // Trigger on first touch
+    document.addEventListener('touchstart', hideUrlBarOnce, { passive: true });
+    
+    // Also hide URL bar after a short delay on mobile
+    if (window.innerWidth < 768) {
+        setTimeout(hideMobileUrlBar, 500);
+    }
+});

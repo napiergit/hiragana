@@ -185,7 +185,7 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col px-4 pb-2 overflow-hidden">
             <!-- Character Display - Compact -->
-            <div class="text-center mb-1">
+            <div class="text-center mb-0 md:mb-1">
                 <div class="flex items-center justify-center gap-3">
                     <div class="character-display" id="characterDisplay">あ</div>
                     <div class="flex flex-col items-start">
@@ -199,7 +199,7 @@
             </div>
 
             <!-- Drawing Canvas Container -->
-            <div class="flex-1 relative flex items-center justify-center mb-1">
+            <div class="flex-1 relative flex items-center justify-center mb-0 md:mb-1">
                 <div class="relative w-full max-w-full md:max-w-sm aspect-square">
                     <div class="absolute inset-0 bg-gray-50 rounded-2xl border-4 border-dashed border-gray-300">
                         <canvas 
@@ -221,7 +221,7 @@
             </div>
 
             <!-- Controls -->
-            <div class="flex flex-wrap gap-2 justify-center items-center pb-6 md:pb-8">
+            <div class="flex flex-wrap gap-2 justify-center items-center pb-8 md:pb-12">
                 <button 
                     id="prevBtn"
                     class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 text-sm"
