@@ -1063,11 +1063,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let lastScrollY = 0;
         let lastScrollTime = Date.now();
         let scrollTimeout;
+        let isAnimating = false;
         const splashScreen = document.querySelector('.splash-screen');
         const splashHeight = splashScreen ? splashScreen.offsetHeight : window.innerHeight;
         const targetPosition = splashHeight + 100; // App position with padding
         
         window.addEventListener('scroll', () => {
+            // Don't interfere if we're animating
+            if (isAnimating) return;
             const currentScrollY = window.scrollY;
             const currentTime = Date.now();
             const timeDelta = currentTime - lastScrollTime;
@@ -1080,45 +1083,70 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!hasSnapped && currentScrollY > 100) {
                 hasSnapped = true;
                 
-                // Calculate duration based on velocity (faster scroll = faster snap)
-                const distance = targetPosition - currentScrollY;
-                const baseDuration = 800; // Base duration in ms
-                const velocityFactor = Math.abs(velocity) * 1000; // Convert to pixels/second
-                const duration = Math.max(300, Math.min(baseDuration, baseDuration / (1 + velocityFactor / 500)));
+                // Disable CSS scroll snap after initial snap
+                document.body.style.scrollSnapType = 'none';
                 
-                // Smooth scroll to target with calculated duration
+                // Quick snap with minimal animation
+                const distance = targetPosition - currentScrollY;
+                const duration = 150; // Very fast 150ms
+                
                 const startY = currentScrollY;
                 const startTime = Date.now();
+                
+                isAnimating = true;
                 
                 const animateScroll = () => {
                     const elapsed = Date.now() - startTime;
                     const progress = Math.min(elapsed / duration, 1);
                     
-                    // Ease out cubic
-                    const easeProgress = 1 - Math.pow(1 - progress, 3);
-                    const newY = startY + (distance * easeProgress);
+                    // Linear easing for snappy feel
+                    const newY = startY + (distance * progress);
                     
                     window.scrollTo(0, newY);
                     
                     if (progress < 1) {
                         requestAnimationFrame(animateScroll);
+                    } else {
+                        isAnimating = false;
                     }
                 };
                 
                 animateScroll();
             }
             
-            // After initial snap, keep user centered on app
-            if (hasSnapped) {
+            // After initial snap, keep user centered on app (only on downward scroll)
+            // Don't snap if user is at the top (viewing splash screen)
+            if (hasSnapped && currentScrollY > splashHeight * 0.5) {
                 clearTimeout(scrollTimeout);
                 
-                // After 100ms of no scrolling, snap back to center
-                scrollTimeout = setTimeout(() => {
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }, 100);
+                // Only set timeout if scrolling down
+                if (scrollDelta > 0) {
+                    // After 50ms of no scrolling, snap back to center
+                    scrollTimeout = setTimeout(() => {
+                        const startY = window.scrollY;
+                        const distance = targetPosition - startY;
+                        const duration = 150; // Same fast 150ms
+                        const startTime = Date.now();
+                        
+                        isAnimating = true;
+                        
+                        const animateSnap = () => {
+                            const elapsed = Date.now() - startTime;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const newY = startY + (distance * progress); // Linear
+                            
+                            window.scrollTo(0, newY);
+                            
+                            if (progress < 1) {
+                                requestAnimationFrame(animateSnap);
+                            } else {
+                                isAnimating = false;
+                            }
+                        };
+                        
+                        animateSnap();
+                    }, 50);
+                }
             }
             
             lastScrollY = currentScrollY;
