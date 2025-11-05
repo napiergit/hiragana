@@ -163,6 +163,11 @@ function init() {
     console.log(`🎨 Theme: ${themeManager.currentTheme}, Dark mode: ${themeManager.isDarkMode}`);
     themeManager.applyTheme();
     
+    // Apply theme again after a short delay to ensure it overrides initial HTML
+    setTimeout(() => {
+        themeManager.applyTheme();
+    }, 50);
+    
     // Restore saved progress
     const savedIndex = localStorage.getItem('hiragana-progress');
     if (savedIndex !== null) {
@@ -1000,5 +1005,15 @@ function animateSuccess() {
 document.addEventListener('DOMContentLoaded', () => {
     init();
     
-    // That's it - no URL bar tricks, just a clean working app
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {
+            // Silently fail if service worker registration fails
+        });
+    }
+    
+    // Scroll to hide URL bar (now there's 100px to scroll)
+    setTimeout(() => {
+        window.scrollTo(0, 1);
+    }, 100);
 });

@@ -111,7 +111,7 @@ const themes = {
 class ThemeManager {
     constructor() {
         // Set defaults first
-        this.currentTheme = 'lavender';
+        this.currentTheme = 'forest';
         this.isDarkMode = false;
         
         // Load saved preferences
@@ -169,6 +169,7 @@ class ThemeManager {
     applyTheme() {
         const colors = this.getColors();
         const body = document.body;
+        const html = document.documentElement;
         
         // Add/remove dark-mode class
         if (this.isDarkMode) {
@@ -180,16 +181,70 @@ class ThemeManager {
         // Update dark mode button immediately
         this.updateDarkModeButton();
         
-        // Remove all theme classes
+        // Remove all theme classes from body
         body.className = body.className.split(' ').filter(c => 
             !c.startsWith('from-') && 
             !c.startsWith('via-') && 
-            !c.startsWith('to-')
+            !c.startsWith('to-') &&
+            !c.startsWith('bg-')
         ).join(' ');
         
-        // Add new gradient classes
+        // Get the middle color from gradient for solid background
         const gradientClasses = colors.bg.split(' ');
-        body.classList.add(...gradientClasses);
+        const viaColorClass = gradientClasses.find(c => c.startsWith('via-'));
+        if (viaColorClass) {
+            const colorValue = viaColorClass.replace('via-', '');
+            const colorMap = {
+                // Light mode colors (50)
+                'purple-50': '#faf5ff',
+                'pink-50': '#fdf2f8',
+                'blue-50': '#eff6ff',
+                'green-50': '#f0fdf4',
+                'emerald-50': '#ecfdf5',
+                'teal-50': '#f0fdfa',
+                'cyan-50': '#ecfeff',
+                'orange-50': '#fff7ed',
+                'red-50': '#fef2f2',
+                'rose-50': '#fff1f2',
+                'fuchsia-50': '#fdf4ff',
+                'indigo-50': '#eef2ff',
+                // Dark mode colors (950)
+                'purple-950': '#3b0764',
+                'pink-950': '#500724',
+                'blue-950': '#172554',
+                'green-950': '#052e16',
+                'emerald-950': '#022c22',
+                'teal-950': '#042f2e',
+                'cyan-950': '#083344',
+                'orange-950': '#431407',
+                'red-950': '#450a0a',
+                'rose-950': '#4c0519',
+                'fuchsia-950': '#4a044e',
+                'indigo-950': '#1e1b4b'
+            };
+            const bgColor = colorMap[colorValue] || '#ecfdf5';
+            
+            // Set EVERYTHING to the same solid color
+            // Body gets solid background
+            body.style.background = bgColor;
+            
+            // HTML gets solid background (for safe areas)
+            html.style.background = bgColor;
+            
+            // Update theme-color meta tag (for Safari's minimal UI bar)
+            // Safari needs a delay to recognize the change
+            setTimeout(() => {
+                const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+                if (themeColorMeta) {
+                    themeColorMeta.setAttribute('content', bgColor);
+                } else {
+                    const newMeta = document.createElement('meta');
+                    newMeta.name = 'theme-color';
+                    newMeta.content = bgColor;
+                    document.head.appendChild(newMeta);
+                }
+            }, 100);
+        }
         
         // Update progress bars (all 3)
         for (let i = 1; i <= 3; i++) {
