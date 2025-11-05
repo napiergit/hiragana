@@ -198,6 +198,13 @@ function setupThemeUI() {
             if (showStrokeOrder) {
                 updateStrokeOrder();
             }
+            // Track theme change
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'theme_changed', {
+                    theme_name: theme.name,
+                    theme_id: theme.id
+                });
+            }
         };
         themeList.appendChild(btn);
     });
@@ -208,6 +215,12 @@ function setupThemeUI() {
         // Re-render stroke order with new colors
         if (showStrokeOrder) {
             updateStrokeOrder();
+        }
+        // Track dark mode toggle
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'dark_mode_toggled', {
+                dark_mode: themeManager.isDarkMode
+            });
         }
     });
     
@@ -718,6 +731,15 @@ function nextCharacter() {
         updateStrokeOrder();
         clearCanvas();
         animateSuccess();
+        
+        // Track character completion
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'character_completed', {
+                character: hiraganaCharacters[currentIndex - 1].char,
+                romaji: hiraganaCharacters[currentIndex - 1].romaji,
+                progress: currentIndex
+            });
+        }
     }
 }
 
@@ -1011,31 +1033,9 @@ if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
     window.scrollTo(0, 0);
 }
 
-// Speak Japanese pronunciation
-function speakCharacter() {
-    const character = currentChar.char;
-    
-    if ('speechSynthesis' in window) {
-        // Cancel any ongoing speech
-        window.speechSynthesis.cancel();
-        
-        const utterance = new SpeechSynthesisUtterance(character);
-        utterance.lang = 'ja-JP'; // Japanese
-        utterance.rate = 0.8; // Slightly slower for clarity
-        
-        window.speechSynthesis.speak(utterance);
-    }
-}
-
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     init();
-    
-    // Add speaker button listener
-    const speakBtn = document.getElementById('speakBtn');
-    if (speakBtn) {
-        speakBtn.addEventListener('click', speakCharacter);
-    }
     
     // Force scroll to top again after DOM loads
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {

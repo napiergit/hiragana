@@ -9,6 +9,16 @@
     <meta name="theme-color" content="#ecfdf5">
     <link rel="manifest" href="manifest.json">
     <title>ひらがな Practice - Learn Hiragana v2</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3LHFL99594"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3LHFL99594');
+    </script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Kosugi+Maru&display=swap');
@@ -373,10 +383,7 @@
                 <div class="flex items-center justify-center gap-3">
                     <div class="character-display" id="characterDisplay">あ</div>
                     <div class="flex flex-col items-start">
-                        <div class="flex items-center gap-2">
-                            <div class="text-lg font-semibold text-gray-700" id="romajiDisplay">a</div>
-                            <button id="speakBtn" class="text-2xl hover:scale-110 transition-transform" title="Speak pronunciation">🔊</button>
-                        </div>
+                        <div class="text-lg font-semibold text-gray-700" id="romajiDisplay">a</div>
                         <div class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full text-[10px] font-semibold whitespace-nowrap">
                             <span id="currentIndex">1</span>/<span id="totalChars">71</span>
                         </div>
