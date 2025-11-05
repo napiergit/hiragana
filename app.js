@@ -1012,8 +1012,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Scroll to hide URL bar (now there's 100px to scroll)
-    setTimeout(() => {
-        window.scrollTo(0, 1);
-    }, 100);
+    // Hide fullscreen button - Safari doesn't allow JS to hide URL bar
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    if (fullscreenBtn) {
+        fullscreenBtn.style.display = 'none';
+    }
+    
+    // Snap to app after user stops scrolling on mobile
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        let scrollTimeout;
+        let hasScrolled = false;
+        const splashScreen = document.querySelector('.splash-screen');
+        const splashHeight = splashScreen ? splashScreen.offsetHeight : window.innerHeight;
+        const targetPosition = splashHeight + 100; // App position with padding
+        
+        window.addEventListener('scroll', () => {
+            // Mark that user has scrolled
+            if (!hasScrolled) {
+                hasScrolled = true;
+            }
+            
+            clearTimeout(scrollTimeout);
+            
+            // Only snap if user has already scrolled once
+            if (hasScrolled) {
+                // After user stops scrolling for 500ms, snap to app
+                scrollTimeout = setTimeout(() => {
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 500);
+            }
+        }, { passive: true });
+    }
 });

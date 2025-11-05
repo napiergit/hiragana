@@ -38,13 +38,61 @@
             font-family: 'Noto Sans JP', sans-serif;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            scroll-snap-type: y mandatory;
         }
         
-        /* Add scrollable space to enable URL bar hiding */
+        /* Permanent padding above app to keep URL bar hidden */
+        body::before {
+            content: '';
+            display: block;
+            height: 0;
+        }
+        
+        @media (max-width: 768px) {
+            body::before {
+                height: 100px;
+            }
+        }
+        
+        /* Add scrollable space at bottom */
         body::after {
             content: '';
             display: block;
-            height: 100px;
+            height: 300px;
+        }
+        
+        /* Splash screen before app */
+        .splash-screen {
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            scroll-snap-align: start;
+        }
+        
+        @media (max-width: 768px) {
+            .splash-screen {
+                display: flex;
+            }
+        }
+        
+        .splash-screen h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+        
+        .splash-screen .arrow {
+            font-size: 4rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
         
         .app-container {
@@ -52,16 +100,44 @@
             /* Account for safe area (notch) */
             padding-top: env(safe-area-inset-top, 0px);
             padding-bottom: env(safe-area-inset-bottom, 0px);
-            /* Add space at top so header is accessible when scrolled */
-            margin-top: 50px;
             display: flex;
             flex-direction: column;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
         }
         
         #drawingCanvas {
             touch-action: none;
             cursor: crosshair;
             transition: background-color 0.3s ease;
+        }
+        
+        /* Floating fullscreen button */
+        #fullscreenBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            cursor: pointer;
+            display: none;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        #fullscreenBtn.show {
+            display: block;
         }
         
         body.dark-mode #drawingCanvas {
@@ -177,6 +253,16 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100">
+    <!-- Floating fullscreen button -->
+    <button id="fullscreenBtn" class="show" title="Enter Fullscreen">⛶</button>
+    
+    <!-- Splash screen (mobile only) -->
+    <div class="splash-screen">
+        <h1>ひらがな Practice</h1>
+        <p style="font-size: 1.5rem; margin-bottom: 3rem; opacity: 0.8;">Swipe up to learn</p>
+        <div class="arrow">↑</div>
+    </div>
+    
     <div class="app-container">
         <!-- Header -->
         <header class="text-center py-1 px-4 fade-in relative">
