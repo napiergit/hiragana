@@ -11,7 +11,7 @@
     <title>ひらがな Practice - Learn Hiragana v2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Kosugi+Maru&display=swap');
         
         * {
             box-sizing: border-box;
@@ -176,6 +176,10 @@
             background-color: #1f2937 !important;
         }
         
+        #referenceCharacter {
+            font-family: 'Kosugi Maru', sans-serif;
+        }
+        
         body.dark-mode #referenceCharacter {
             opacity: 0.15 !important;
             color: #9ca3af !important;
@@ -183,6 +187,7 @@
         
         .character-display {
             font-size: 4rem;
+            font-family: 'Kosugi Maru', sans-serif;
             color: #e0e0e0;
             user-select: none;
         }
@@ -350,7 +355,10 @@
                 <div class="flex items-center justify-center gap-3">
                     <div class="character-display" id="characterDisplay">あ</div>
                     <div class="flex flex-col items-start">
-                        <div class="text-lg font-semibold text-gray-700" id="romajiDisplay">a</div>
+                        <div class="flex items-center gap-2">
+                            <div class="text-lg font-semibold text-gray-700" id="romajiDisplay">a</div>
+                            <button id="speakBtn" class="text-2xl hover:scale-110 transition-transform" title="Speak pronunciation">🔊</button>
+                        </div>
                         <div class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full text-[10px] font-semibold whitespace-nowrap">
                             <span id="currentIndex">1</span>/<span id="totalChars">71</span>
                         </div>

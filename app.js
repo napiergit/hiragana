@@ -1011,9 +1011,31 @@ if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
     window.scrollTo(0, 0);
 }
 
+// Speak Japanese pronunciation
+function speakCharacter() {
+    const character = currentChar.char;
+    
+    if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(character);
+        utterance.lang = 'ja-JP'; // Japanese
+        utterance.rate = 0.8; // Slightly slower for clarity
+        
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     init();
+    
+    // Add speaker button listener
+    const speakBtn = document.getElementById('speakBtn');
+    if (speakBtn) {
+        speakBtn.addEventListener('click', speakCharacter);
+    }
     
     // Force scroll to top again after DOM loads
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
