@@ -1001,9 +1001,26 @@ function animateSuccess() {
     }, 500);
 }
 
+// Prevent browser from restoring scroll position
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+// Reset scroll immediately on mobile
+if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    window.scrollTo(0, 0);
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     init();
+    
+    // Force scroll to top again after DOM loads
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 0);
+    }
     
     // Register service worker for PWA
     if ('serviceWorker' in navigator) {
@@ -1018,32 +1035,72 @@ document.addEventListener('DOMContentLoaded', () => {
         fullscreenBtn.style.display = 'none';
     }
     
-    // Snap to app after user stops scrolling on mobile
+    // Momentum-based snap to app on mobile
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        let hasSnapped = false;
+        let lastScrollY = 0;
+        let lastScrollTime = Date.now();
         let scrollTimeout;
-        let hasScrolled = false;
         const splashScreen = document.querySelector('.splash-screen');
         const splashHeight = splashScreen ? splashScreen.offsetHeight : window.innerHeight;
         const targetPosition = splashHeight + 100; // App position with padding
         
         window.addEventListener('scroll', () => {
-            // Mark that user has scrolled
-            if (!hasScrolled) {
-                hasScrolled = true;
+            const currentScrollY = window.scrollY;
+            const currentTime = Date.now();
+            const timeDelta = currentTime - lastScrollTime;
+            const scrollDelta = currentScrollY - lastScrollY;
+            
+            // Calculate velocity (pixels per millisecond)
+            const velocity = timeDelta > 0 ? scrollDelta / timeDelta : 0;
+            
+            // Initial snap from splash to app
+            if (!hasSnapped && currentScrollY > 100) {
+                hasSnapped = true;
+                
+                // Calculate duration based on velocity (faster scroll = faster snap)
+                const distance = targetPosition - currentScrollY;
+                const baseDuration = 800; // Base duration in ms
+                const velocityFactor = Math.abs(velocity) * 1000; // Convert to pixels/second
+                const duration = Math.max(300, Math.min(baseDuration, baseDuration / (1 + velocityFactor / 500)));
+                
+                // Smooth scroll to target with calculated duration
+                const startY = currentScrollY;
+                const startTime = Date.now();
+                
+                const animateScroll = () => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Ease out cubic
+                    const easeProgress = 1 - Math.pow(1 - progress, 3);
+                    const newY = startY + (distance * easeProgress);
+                    
+                    window.scrollTo(0, newY);
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateScroll);
+                    }
+                };
+                
+                animateScroll();
             }
             
-            clearTimeout(scrollTimeout);
-            
-            // Only snap if user has already scrolled once
-            if (hasScrolled) {
-                // After user stops scrolling for 500ms, snap to app
+            // After initial snap, keep user centered on app
+            if (hasSnapped) {
+                clearTimeout(scrollTimeout);
+                
+                // After 100ms of no scrolling, snap back to center
                 scrollTimeout = setTimeout(() => {
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
                     });
-                }, 500);
+                }, 100);
             }
+            
+            lastScrollY = currentScrollY;
+            lastScrollTime = currentTime;
         }, { passive: true });
     }
 });

@@ -64,25 +64,49 @@
         /* Splash screen before app */
         .splash-screen {
             height: 100vh;
+            width: 100%;
             display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: relative;
             text-align: center;
-            padding: 20px;
             scroll-snap-align: start;
         }
         
         @media (max-width: 768px) {
             .splash-screen {
-                display: flex;
+                display: block;
             }
+        }
+        
+        .splash-screen .top-section {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-140px);
+        }
+        
+        .splash-screen .bottom-section {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            transform: translateY(-145px);
         }
         
         .splash-screen h1 {
             font-size: 3rem;
-            margin-bottom: 2rem;
             font-weight: bold;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .splash-screen .instruction {
+            font-size: 1.5rem;
+            margin: 0 0 2rem 0;
+            padding: 0;
         }
         
         .splash-screen .arrow {
@@ -258,9 +282,13 @@
     
     <!-- Splash screen (mobile only) -->
     <div class="splash-screen">
-        <h1>ひらがな Practice</h1>
-        <p style="font-size: 1.5rem; margin-bottom: 3rem; opacity: 0.8;">Swipe up to learn</p>
-        <div class="arrow">↑</div>
+        <div class="top-section">
+            <h1>ひらがな Practice</h1>
+        </div>
+        <div class="bottom-section">
+            <p class="instruction">Swipe to learn</p>
+            <div class="arrow">↑</div>
+        </div>
     </div>
     
     <div class="app-container">
@@ -282,7 +310,7 @@
                 <div id="themeList" class="flex flex-col gap-1"></div>
             </div>
             
-            <h1 class="text-xl md:text-2xl font-bold text-purple-900 mb-1">ひらがな Practice</h1>
+            <h1 class="text-xl md:text-2xl font-bold text-white mb-1">ひらがな Practice</h1>
             <!-- Progress Bars -->
             <div class="max-w-md mx-auto">
                 <div class="flex justify-between items-center mb-1">
