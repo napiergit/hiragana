@@ -41,6 +41,14 @@
             scroll-snap-type: y mandatory;
         }
         
+        /* Desktop: no scrolling */
+        @media (min-width: 769px) {
+            body {
+                overflow: hidden;
+                height: 100vh;
+            }
+        }
+        
         /* Permanent padding above app to keep URL bar hidden */
         body::before {
             content: '';
@@ -54,11 +62,13 @@
             }
         }
         
-        /* Add scrollable space at bottom */
-        body::after {
-            content: '';
-            display: block;
-            height: 300px;
+        /* Add scrollable space at bottom - mobile only */
+        @media (max-width: 768px) {
+            body::after {
+                content: '';
+                display: block;
+                height: 300px;
+            }
         }
         
         /* Splash screen before app */
@@ -123,11 +133,19 @@
             min-height: 100vh;
             /* Account for safe area (notch) */
             padding-top: env(safe-area-inset-top, 0px);
-            padding-bottom: env(safe-area-inset-bottom, 0px);
             display: flex;
             flex-direction: column;
             scroll-snap-align: start;
             scroll-snap-stop: always;
+        }
+        
+        /* Desktop: add padding above and make it fit viewport */
+        @media (min-width: 769px) {
+            .app-container {
+                height: 100vh;
+                min-height: auto;
+                padding-top: 2rem;
+            }
         }
         
         #drawingCanvas {
