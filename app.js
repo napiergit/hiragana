@@ -1,54 +1,54 @@
 // Hiragana characters organized by type
-// Section 1: Basic Hiragana (46 characters) - iOS keyboard order (a, e, i, o, u)
+// Section 1: Basic Hiragana (46 characters) - Standard Japanese order (a, i, u, e, o)
 const basicHiragana = [
     // Vowels
     { char: 'あ', romaji: 'a' },
-    { char: 'え', romaji: 'e' },
     { char: 'い', romaji: 'i' },
-    { char: 'お', romaji: 'o' },
     { char: 'う', romaji: 'u' },
+    { char: 'え', romaji: 'e' },
+    { char: 'お', romaji: 'o' },
     
     // K row
     { char: 'か', romaji: 'ka' },
-    { char: 'け', romaji: 'ke' },
     { char: 'き', romaji: 'ki' },
-    { char: 'こ', romaji: 'ko' },
     { char: 'く', romaji: 'ku' },
+    { char: 'け', romaji: 'ke' },
+    { char: 'こ', romaji: 'ko' },
     
     // S row
     { char: 'さ', romaji: 'sa' },
-    { char: 'せ', romaji: 'se' },
     { char: 'し', romaji: 'shi' },
-    { char: 'そ', romaji: 'so' },
     { char: 'す', romaji: 'su' },
+    { char: 'せ', romaji: 'se' },
+    { char: 'そ', romaji: 'so' },
     
     // T row
     { char: 'た', romaji: 'ta' },
-    { char: 'て', romaji: 'te' },
     { char: 'ち', romaji: 'chi' },
-    { char: 'と', romaji: 'to' },
     { char: 'つ', romaji: 'tsu' },
+    { char: 'て', romaji: 'te' },
+    { char: 'と', romaji: 'to' },
     
     // N row
     { char: 'な', romaji: 'na' },
-    { char: 'ね', romaji: 'ne' },
     { char: 'に', romaji: 'ni' },
-    { char: 'の', romaji: 'no' },
     { char: 'ぬ', romaji: 'nu' },
+    { char: 'ね', romaji: 'ne' },
+    { char: 'の', romaji: 'no' },
     
     // H row
     { char: 'は', romaji: 'ha' },
-    { char: 'へ', romaji: 'he' },
     { char: 'ひ', romaji: 'hi' },
-    { char: 'ほ', romaji: 'ho' },
     { char: 'ふ', romaji: 'fu' },
+    { char: 'へ', romaji: 'he' },
+    { char: 'ほ', romaji: 'ho' },
     
     // M row
     { char: 'ま', romaji: 'ma' },
-    { char: 'め', romaji: 'me' },
     { char: 'み', romaji: 'mi' },
-    { char: 'も', romaji: 'mo' },
     { char: 'む', romaji: 'mu' },
+    { char: 'め', romaji: 'me' },
+    { char: 'も', romaji: 'mo' },
     
     // Y row
     { char: 'や', romaji: 'ya' },
@@ -57,10 +57,10 @@ const basicHiragana = [
     
     // R row
     { char: 'ら', romaji: 'ra' },
-    { char: 'れ', romaji: 're' },
     { char: 'り', romaji: 'ri' },
-    { char: 'ろ', romaji: 'ro' },
     { char: 'る', romaji: 'ru' },
+    { char: 'れ', romaji: 're' },
+    { char: 'ろ', romaji: 'ro' },
     
     // W row
     { char: 'わ', romaji: 'wa' },
@@ -70,44 +70,44 @@ const basicHiragana = [
     { char: 'ん', romaji: 'n' }
 ];
 
-// Section 2: Dakuten (20 characters) - iOS keyboard order (a, e, i, o, u)
+// Section 2: Dakuten (20 characters) - Standard Japanese order (a, i, u, e, o)
 const dakutenCharacters = [
     // G row
     { char: 'が', romaji: 'ga' },
-    { char: 'げ', romaji: 'ge' },
     { char: 'ぎ', romaji: 'gi' },
-    { char: 'ご', romaji: 'go' },
     { char: 'ぐ', romaji: 'gu' },
+    { char: 'げ', romaji: 'ge' },
+    { char: 'ご', romaji: 'go' },
     
     // Z row
     { char: 'ざ', romaji: 'za' },
-    { char: 'ぜ', romaji: 'ze' },
     { char: 'じ', romaji: 'ji' },
-    { char: 'ぞ', romaji: 'zo' },
     { char: 'ず', romaji: 'zu' },
+    { char: 'ぜ', romaji: 'ze' },
+    { char: 'ぞ', romaji: 'zo' },
     
     // D row
     { char: 'だ', romaji: 'da' },
-    { char: 'で', romaji: 'de' },
     { char: 'ぢ', romaji: 'di' },
-    { char: 'ど', romaji: 'do' },
     { char: 'づ', romaji: 'du' },
+    { char: 'で', romaji: 'de' },
+    { char: 'ど', romaji: 'do' },
     
     // B row
     { char: 'ば', romaji: 'ba' },
-    { char: 'べ', romaji: 'be' },
     { char: 'び', romaji: 'bi' },
-    { char: 'ぼ', romaji: 'bo' },
-    { char: 'ぶ', romaji: 'bu' }
+    { char: 'ぶ', romaji: 'bu' },
+    { char: 'べ', romaji: 'be' },
+    { char: 'ぼ', romaji: 'bo' }
 ];
 
-// Section 3: Handakuten (5 characters) - iOS keyboard order (a, e, i, o, u)
+// Section 3: Handakuten (5 characters) - Standard Japanese order (a, i, u, e, o)
 const handakutenCharacters = [
     { char: 'ぱ', romaji: 'pa' },
-    { char: 'ぺ', romaji: 'pe' },
     { char: 'ぴ', romaji: 'pi' },
-    { char: 'ぽ', romaji: 'po' },
-    { char: 'ぷ', romaji: 'pu' }
+    { char: 'ぷ', romaji: 'pu' },
+    { char: 'ぺ', romaji: 'pe' },
+    { char: 'ぽ', romaji: 'po' }
 ];
 
 // Combined array
