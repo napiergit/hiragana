@@ -342,6 +342,15 @@
             transition: color 0.3s ease;
         }
         
+        .heading-text {
+            color: #1f2937; /* dark gray for light mode */
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .heading-text {
+            color: #ffffff; /* white for dark mode */
+        }
+        
         .theme-bg {
             transition: background-color 0.3s ease;
         }
@@ -387,7 +396,7 @@
                 <div id="themeList" class="flex flex-col gap-1"></div>
             </div>
             
-            <h1 class="text-xl md:text-2xl font-bold text-white mb-1">ひらがな Practice</h1>
+            <h1 class="text-xl md:text-2xl font-bold heading-text mb-1">ひらがな Practice</h1>
             <!-- Progress Bars -->
             <div class="max-w-md mx-auto">
                 <div class="flex justify-between items-center mb-1">

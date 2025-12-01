@@ -212,10 +212,11 @@ function setupThemeUI() {
     // Dark mode button
     document.getElementById('darkModeBtn').addEventListener('click', () => {
         themeManager.toggleDarkMode();
-        // Re-render stroke order with new colors
+        // Re-render stroke order and reference character with new colors
         if (showStrokeOrder) {
             updateStrokeOrder();
         }
+        updateDisplay(); // Update reference character for new theme
         // Track dark mode toggle
         if (typeof gtag !== 'undefined') {
             gtag('event', 'dark_mode_toggled', {
@@ -239,11 +240,12 @@ function setupThemeUI() {
         }
     });
     
-    // Listen for theme changes to update stroke order
+    // Listen for theme changes to update stroke order and reference character
     window.addEventListener('themeChanged', () => {
         if (showStrokeOrder) {
             updateStrokeOrder();
         }
+        updateDisplay(); // Update reference character for new theme
     });
 }
 
@@ -824,7 +826,48 @@ function updateDisplay() {
     // Update character displays
     document.getElementById('characterDisplay').textContent = current.char;
     document.getElementById('romajiDisplay').textContent = current.romaji;
-    document.getElementById('referenceCharacter').textContent = current.char;
+    
+    // Update reference character to use SVG paths that match stroke order
+    const refChar = document.getElementById('referenceCharacter');
+    if (!refChar) {
+        console.error('❌ referenceCharacter element not found!');
+        return;
+    }
+    
+    refChar.innerHTML = ''; // Clear existing content
+    
+    // Create SVG container with explicit dimensions
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('width', '288'); // 18rem = 288px
+    svg.setAttribute('height', '288');
+    svg.style.display = 'block';
+    
+    // Add all strokes as paths
+    const strokes = strokeOrderData[current.char];
+    console.log('📝 Creating reference for:', current.char, 'with', strokes?.length, 'strokes');
+    
+    if (strokes) {
+        // Use VERY visible colors
+        const isDark = themeManager && themeManager.isDarkMode;
+        const strokeColor = isDark ? '#ffffff' : '#000000'; // Pure white or pure black
+        
+        strokes.forEach(stroke => {
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', stroke.path);
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke', strokeColor);
+            path.setAttribute('stroke-width', '4');
+            path.setAttribute('stroke-linecap', 'round');
+            path.setAttribute('stroke-linejoin', 'round');
+            path.setAttribute('opacity', '0.7');
+            svg.appendChild(path);
+        });
+    }
+    
+    refChar.appendChild(svg);
+    console.log('✅ SVG appended to refChar');
+    
     document.getElementById('currentIndex').textContent = currentIndex + 1;
     document.getElementById('totalChars').textContent = hiraganaCharacters.length;
     
