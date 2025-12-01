@@ -749,6 +749,7 @@ function nextCharacter() {
 function previousCharacter() {
     if (currentIndex > 0) {
         currentIndex--;
+        localStorage.setItem('hiragana-progress', currentIndex);
         updateDisplay();
         updateStrokeOrder();
         clearCanvas();
