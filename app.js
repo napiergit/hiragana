@@ -1382,7 +1382,9 @@ function createCharacterCard(charData) {
 
     const romaji = document.createElement('div');
     romaji.className = 'char-card-romaji';
-    romaji.textContent = charData.romaji;
+    romaji.innerHTML = charData.meaning
+        ? `${charData.romaji}<div class="text-[10px] opacity-75 font-normal">(${charData.meaning})</div>`
+        : charData.romaji;
 
     const checkboxContainer = document.createElement('div');
     checkboxContainer.className = 'char-card-checkbox';
