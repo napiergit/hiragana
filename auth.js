@@ -146,10 +146,17 @@ class AuthManager {
             console.log('✅ Sign in successful:', result.user.email);
 
             // Check if this is first sign in - migrate local data
-            const userDoc = await this.getUserDoc();
-            if (!userDoc.exists()) {
-                console.log('📦 First sign in - migrating local data to cloud');
-                await this.migrateLocalData();
+            try {
+                const userDoc = await this.getUserDoc();
+                if (!userDoc.exists()) {
+                    console.log('📦 First sign in - migrating local data to cloud');
+                    await this.migrateLocalData();
+                } else {
+                    console.log('📥 Existing user - data already in Firestore');
+                }
+            } catch (firestoreError) {
+                console.error('⚠️ Firestore operation failed (but sign-in succeeded):', firestoreError);
+                // Don't throw - let sign-in succeed even if Firestore fails
             }
 
             // Track sign in event
@@ -162,13 +169,17 @@ class AuthManager {
         } catch (error) {
             console.error('❌ Sign in failed:', error);
 
-            if (error.code === 'auth/popup-blocked') {
-                alert('Pop-up blocked! Please allow pop-ups for this site and try again.');
-            } else if (error.code === 'auth/popup-closed-by-user') {
-                console.log('User closed the sign-in popup');
-            } else {
-                alert('Sign in failed. Please try again.');
+            // Only show alert for actual authentication errors, not Firestore errors
+            if (error.code && error.code.startsWith('auth/')) {
+                if (error.code === 'auth/popup-blocked') {
+                    alert('Pop-up blocked! Please allow pop-ups for this site and try again.');
+                } else if (error.code === 'auth/popup-closed-by-user') {
+                    console.log('User closed the sign-in popup');
+                } else {
+                    alert('Sign in failed. Please try again.');
+                }
             }
+            // Firestore errors are logged but don't block sign-in
         }
     }
 
