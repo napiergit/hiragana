@@ -1404,11 +1404,27 @@ function createCharacterCard(charData) {
     card.appendChild(romaji);
     card.appendChild(checkboxContainer);
 
-    // Click card to toggle checkbox
+    // Click card to navigate to character in practice mode
     card.addEventListener('click', (e) => {
-        if (e.target !== checkbox) {
-            checkbox.checked = !checkbox.checked;
-            checkbox.dispatchEvent(new Event('change'));
+        // Don't navigate if clicking the checkbox
+        if (e.target === checkbox || e.target === checkboxContainer || checkboxContainer.contains(e.target)) {
+            return;
+        }
+
+        // Find character index in hiraganaCharacters array
+        const charIndex = hiraganaCharacters.findIndex(c => c.char === charData.char);
+        if (charIndex !== -1) {
+            currentIndex = charIndex;
+            localStorage.setItem('hiragana-progress', currentIndex);
+            updateDisplay();
+            updateStrokeOrder();
+            clearCanvas();
+
+            // Close the modal
+            const charModal = document.getElementById('charModal');
+            if (charModal) {
+                charModal.classList.remove('show');
+            }
         }
     });
 
