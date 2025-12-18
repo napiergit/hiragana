@@ -3,67 +3,67 @@
 const basicHiragana = [
     // Vowels
     { char: 'あ', romaji: 'a' },
-    { char: 'い', romaji: 'i' },
-    { char: 'う', romaji: 'u' },
-    { char: 'え', romaji: 'e' },
-    { char: 'お', romaji: 'o' },
+    { char: 'い', romaji: 'i', meaning: 'stomach' },
+    { char: 'う', romaji: 'u', meaning: 'cormorant' },
+    { char: 'え', romaji: 'e', meaning: 'picture' },
+    { char: 'お', romaji: 'o', meaning: 'tail' },
 
     // K row
-    { char: 'か', romaji: 'ka' },
-    { char: 'き', romaji: 'ki' },
-    { char: 'く', romaji: 'ku' },
-    { char: 'け', romaji: 'ke' },
-    { char: 'こ', romaji: 'ko' },
+    { char: 'か', romaji: 'ka', meaning: 'mosquito' },
+    { char: 'き', romaji: 'ki', meaning: 'tree/spirit' },
+    { char: 'く', romaji: 'ku', meaning: 'nine' },
+    { char: 'け', romaji: 'ke', meaning: 'hair' },
+    { char: 'こ', romaji: 'ko', meaning: 'child' },
 
     // S row
-    { char: 'さ', romaji: 'sa' },
-    { char: 'し', romaji: 'shi' },
-    { char: 'す', romaji: 'su' },
-    { char: 'せ', romaji: 'se' },
-    { char: 'そ', romaji: 'so' },
+    { char: 'さ', romaji: 'sa', meaning: 'difference' },
+    { char: 'し', romaji: 'shi', meaning: 'four/poem' },
+    { char: 'す', romaji: 'su', meaning: 'vinegar' },
+    { char: 'せ', romaji: 'se', meaning: 'height' },
+    { char: 'そ', romaji: 'so', meaning: 'foundation' },
 
     // T row
-    { char: 'た', romaji: 'ta' },
-    { char: 'ち', romaji: 'chi' },
-    { char: 'つ', romaji: 'tsu' },
-    { char: 'て', romaji: 'te' },
-    { char: 'と', romaji: 'to' },
+    { char: 'た', romaji: 'ta', meaning: 'field' },
+    { char: 'ち', romaji: 'chi', meaning: 'blood' },
+    { char: 'つ', romaji: 'tsu', meaning: 'port' },
+    { char: 'て', romaji: 'te', meaning: 'hand' },
+    { char: 'と', romaji: 'to', meaning: 'door' },
 
     // N row
-    { char: 'な', romaji: 'na' },
-    { char: 'に', romaji: 'ni' },
+    { char: 'な', romaji: 'na', meaning: 'name/greens' },
+    { char: 'に', romaji: 'ni', meaning: 'two' },
     { char: 'ぬ', romaji: 'nu' },
-    { char: 'ね', romaji: 'ne' },
-    { char: 'の', romaji: 'no' },
+    { char: 'ね', romaji: 'ne', meaning: 'root' },
+    { char: 'の', romaji: 'no', meaning: 'field' },
 
     // H row
-    { char: 'は', romaji: 'ha' },
-    { char: 'ひ', romaji: 'hi' },
-    { char: 'ふ', romaji: 'fu' },
-    { char: 'へ', romaji: 'he' },
-    { char: 'ほ', romaji: 'ho' },
+    { char: 'は', romaji: 'ha', meaning: 'tooth/leaf' },
+    { char: 'ひ', romaji: 'hi', meaning: 'fire/sun' },
+    { char: 'ふ', romaji: 'fu', meaning: 'pawn' },
+    { char: 'へ', romaji: 'he', meaning: 'fart' },
+    { char: 'ほ', romaji: 'ho', meaning: 'sail/ear' },
 
     // M row
-    { char: 'ま', romaji: 'ma' },
-    { char: 'み', romaji: 'mi' },
-    { char: 'む', romaji: 'mu' },
-    { char: 'め', romaji: 'me' },
-    { char: 'も', romaji: 'mo' },
+    { char: 'ま', romaji: 'ma', meaning: 'demon/space' },
+    { char: 'み', romaji: 'mi', meaning: 'three' },
+    { char: 'む', romaji: 'mu', meaning: 'nothing' },
+    { char: 'め', romaji: 'me', meaning: 'eye' },
+    { char: 'も', romaji: 'mo', meaning: 'seaweed' },
 
     // Y row
-    { char: 'や', romaji: 'ya' },
-    { char: 'ゆ', romaji: 'yu' },
-    { char: 'よ', romaji: 'yo' },
+    { char: 'や', romaji: 'ya', meaning: 'arrow' },
+    { char: 'ゆ', romaji: 'yu', meaning: 'hot water' },
+    { char: 'よ', romaji: 'yo', meaning: 'night' },
 
     // R row
     { char: 'ら', romaji: 'ra' },
     { char: 'り', romaji: 'ri' },
     { char: 'る', romaji: 'ru' },
     { char: 'れ', romaji: 're' },
-    { char: 'ろ', romaji: 'ro' },
+    { char: 'ろ', romaji: 'ro', meaning: 'furnace' },
 
     // W row
-    { char: 'わ', romaji: 'wa' },
+    { char: 'わ', romaji: 'wa', meaning: 'circle/harmony' },
     { char: 'を', romaji: 'wo' },
 
     // N
@@ -73,32 +73,32 @@ const basicHiragana = [
 // Section 2: Dakuten (20 characters) - Standard Japanese order (a, i, u, e, o)
 const dakutenCharacters = [
     // G row
-    { char: 'が', romaji: 'ga' },
-    { char: 'ぎ', romaji: 'gi' },
-    { char: 'ぐ', romaji: 'gu' },
-    { char: 'げ', romaji: 'ge' },
-    { char: 'ご', romaji: 'go' },
+    { char: 'が', romaji: 'ga', meaning: 'moth' },
+    { char: 'ぎ', romaji: 'gi', meaning: 'righteousness' },
+    { char: 'ぐ', romaji: 'gu', meaning: 'tool' },
+    { char: 'げ', romaji: 'ge', meaning: 'lower class' },
+    { char: 'ご', romaji: 'go', meaning: 'five/go' },
 
     // Z row
-    { char: 'ざ', romaji: 'za' },
-    { char: 'じ', romaji: 'ji' },
-    { char: 'ず', romaji: 'zu' },
-    { char: 'ぜ', romaji: 'ze' },
+    { char: 'ざ', romaji: 'za', meaning: 'seat' },
+    { char: 'じ', romaji: 'ji', meaning: 'character' },
+    { char: 'ず', romaji: 'zu', meaning: 'figure/chart' },
+    { char: 'ぜ', romaji: 'ze', meaning: 'wrong' },
     { char: 'ぞ', romaji: 'zo' },
 
     // D row
     { char: 'だ', romaji: 'da' },
-    { char: 'ぢ', romaji: 'di' },
+    { char: 'ぢ', romaji: 'di', meaning: 'hemorrhoids' },
     { char: 'づ', romaji: 'du' },
     { char: 'で', romaji: 'de' },
-    { char: 'ど', romaji: 'do' },
+    { char: 'ど', romaji: 'do', meaning: 'degree' },
 
     // B row
-    { char: 'ば', romaji: 'ba' },
-    { char: 'び', romaji: 'bi' },
-    { char: 'ぶ', romaji: 'bu' },
+    { char: 'ば', romaji: 'ba', meaning: 'place' },
+    { char: 'び', romaji: 'bi', meaning: 'beauty' },
+    { char: 'ぶ', romaji: 'bu', meaning: 'part/dept' },
     { char: 'べ', romaji: 'be' },
-    { char: 'ぼ', romaji: 'bo' }
+    { char: 'ぼ', romaji: 'bo', meaning: 'tomb' }
 ];
 
 // Section 3: Handakuten (5 characters) - Standard Japanese order (a, i, u, e, o)
@@ -885,6 +885,11 @@ function updateDisplay() {
     // Update character displays
     document.getElementById('characterDisplay').textContent = current.char;
     document.getElementById('romajiDisplay').textContent = current.romaji;
+
+    const meaningDisplay = document.getElementById('meaningDisplay');
+    if (meaningDisplay) {
+        meaningDisplay.textContent = current.meaning ? `(${current.meaning})` : '';
+    }
 
     // Update reference character to use SVG paths that match stroke order
     const refChar = document.getElementById('referenceCharacter');
