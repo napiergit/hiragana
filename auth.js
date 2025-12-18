@@ -152,7 +152,20 @@ class AuthManager {
                     console.log('📦 First sign in - migrating local data to cloud');
                     await this.migrateLocalData();
                 } else {
-                    console.log('📥 Existing user - data already in Firestore');
+                    console.log('📥 Existing user - checking for data merge');
+                    // Check if cloud has learned data
+                    const userData = userDoc.data();
+                    if (!userData.learned || Object.keys(userData.learned).length === 0) {
+                        // Cloud has no learned data, but we might have local data
+                        const localLearned = localStorage.getItem('hiragana-learned');
+                        if (localLearned && localLearned !== '{}') {
+                            console.log('🔄 Cloud empty but local data exists - merging up');
+                            await this.saveUserData({
+                                ...userData,
+                                learned: JSON.parse(localLearned)
+                            });
+                        }
+                    }
                 }
             } catch (firestoreError) {
                 console.error('⚠️ Firestore operation failed (but sign-in succeeded):', firestoreError);
