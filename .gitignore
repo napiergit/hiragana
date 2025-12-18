@@ -34,3 +34,6 @@ Temporary Items
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Note: firebase-config.js is safe to commit for client-side apps
+# Security is enforced by Firestore Security Rules and Authorized Domains

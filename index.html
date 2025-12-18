@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -8,28 +9,32 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#ecfdf5">
     <link rel="manifest" href="manifest.json">
-    
+
     <!-- SEO Meta Tags -->
     <title>Learn Hiragana - Free Interactive Japanese Writing Practice App</title>
-    <meta name="description" content="Master hiragana with our free interactive app. Practice Japanese writing with stroke order guides, instant feedback, and beautiful themes. Perfect for beginners learning Japanese.">
-    <meta name="keywords" content="hiragana, learn hiragana, japanese alphabet, hiragana practice, japanese writing, learn japanese, hiragana stroke order, japanese characters, kana">
+    <meta name="description"
+        content="Master hiragana with our free interactive app. Practice Japanese writing with stroke order guides, instant feedback, and beautiful themes. Perfect for beginners learning Japanese.">
+    <meta name="keywords"
+        content="hiragana, learn hiragana, japanese alphabet, hiragana practice, japanese writing, learn japanese, hiragana stroke order, japanese characters, kana">
     <meta name="author" content="Andrew James Napier">
     <link rel="canonical" href="https://hiragana.site/">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hiragana.site/">
     <meta property="og:title" content="Learn Hiragana - Free Interactive Japanese Writing Practice">
-    <meta property="og:description" content="Master hiragana with our free interactive app. Practice Japanese writing with stroke order guides and instant feedback.">
+    <meta property="og:description"
+        content="Master hiragana with our free interactive app. Practice Japanese writing with stroke order guides and instant feedback.">
     <meta property="og:image" content="https://hiragana.site/og-image.png">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://hiragana.site/">
     <meta property="twitter:title" content="Learn Hiragana - Free Interactive Japanese Writing Practice">
-    <meta property="twitter:description" content="Master hiragana with our free interactive app. Practice Japanese writing with stroke order guides and instant feedback.">
+    <meta property="twitter:description"
+        content="Master hiragana with our free interactive app. Practice Japanese writing with stroke order guides and instant feedback.">
     <meta property="twitter:image" content="https://hiragana.site/og-image.png">
-    
+
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
@@ -53,37 +58,40 @@
         "featureList": "Stroke order guides, Interactive drawing canvas, Progress tracking, Multiple themes, Dark mode, Mobile optimized"
     }
     </script>
-    
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3LHFL99594"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-3LHFL99594');
     </script>
-    
+
+    <!-- Firebase SDK (v10 Modular) -->
+    <!-- Note: Firebase modules are imported in auth.js using ES6 imports -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Kosugi+Maru&display=swap');
-        
+
         * {
             box-sizing: border-box;
         }
-        
+
         :root {
             /* Support for safe area insets (notch) */
             --safe-area-inset-top: env(safe-area-inset-top, 0px);
             --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
         }
-        
+
         html {
             width: 100%;
             height: 100%;
             /* Default forest theme background for safe area */
             background: #ecfdf5;
         }
-        
+
         body {
             margin: 0;
             padding: 0;
@@ -94,7 +102,7 @@
             -webkit-overflow-scrolling: touch;
             scroll-snap-type: y mandatory;
         }
-        
+
         /* Desktop: no scrolling */
         @media (min-width: 769px) {
             body {
@@ -102,20 +110,20 @@
                 height: 100vh;
             }
         }
-        
+
         /* Permanent padding above app to keep URL bar hidden */
         body::before {
             content: '';
             display: block;
             height: 0;
         }
-        
+
         @media (max-width: 768px) {
             body::before {
                 height: 100px;
             }
         }
-        
+
         /* Add scrollable space at bottom - mobile only */
         @media (max-width: 768px) {
             body::after {
@@ -124,7 +132,7 @@
                 height: 300px;
             }
         }
-        
+
         /* Splash screen before app */
         .splash-screen {
             height: 100vh;
@@ -134,13 +142,13 @@
             text-align: center;
             scroll-snap-align: start;
         }
-        
+
         @media (max-width: 768px) {
             .splash-screen {
                 display: block;
             }
         }
-        
+
         .splash-screen .top-section {
             height: 50vh;
             display: flex;
@@ -148,7 +156,7 @@
             justify-content: center;
             transform: translateY(-140px);
         }
-        
+
         .splash-screen .bottom-section {
             height: 50vh;
             display: flex;
@@ -158,7 +166,7 @@
             color: #9ca3af;
             transform: translateY(-145px);
         }
-        
+
         .splash-screen h1 {
             font-size: 3rem;
             font-weight: bold;
@@ -166,23 +174,30 @@
             margin: 0;
             padding: 0;
         }
-        
+
         .splash-screen .instruction {
             font-size: 1.5rem;
             margin: 0 0 2rem 0;
             padding: 0;
         }
-        
+
         .splash-screen .arrow {
             font-size: 4rem;
             animation: bounce 2s infinite;
         }
-        
+
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
-        
+
         .app-container {
             min-height: 100vh;
             /* Account for safe area (notch) */
@@ -192,7 +207,7 @@
             scroll-snap-align: start;
             scroll-snap-stop: always;
         }
-        
+
         /* Desktop: add padding above and make it fit viewport */
         @media (min-width: 769px) {
             .app-container {
@@ -201,13 +216,13 @@
                 padding-top: 2rem;
             }
         }
-        
+
         #drawingCanvas {
             touch-action: none;
             cursor: crosshair;
             transition: background-color 0.3s ease;
         }
-        
+
         /* Floating fullscreen button */
         #fullscreenBtn {
             position: fixed;
@@ -221,115 +236,164 @@
             width: 60px;
             height: 60px;
             font-size: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             display: none;
             animation: pulse 2s infinite;
         }
-        
+
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
-        
+
         #fullscreenBtn.show {
             display: block;
         }
-        
+
         body.dark-mode #drawingCanvas {
             background-color: #1f2937 !important;
         }
-        
+
         body.dark-mode .bg-white {
             background-color: #374151 !important;
         }
-        
+
         body.dark-mode .bg-gray-50 {
             background-color: #1f2937 !important;
         }
-        
+
         #referenceCharacter {
             font-family: 'Kosugi Maru', sans-serif;
         }
-        
+
         body.dark-mode #referenceCharacter {
             opacity: 0.15 !important;
             color: #9ca3af !important;
         }
-        
+
         .character-display {
             font-size: 4rem;
             font-family: 'Kosugi Maru', sans-serif;
             color: #e0e0e0;
             user-select: none;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
-        
+
         .fade-in {
             animation: fadeIn 0.3s ease-out;
         }
-        
+
         @keyframes success {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
-        
+
         .success-animation {
             animation: success 0.5s ease-in-out;
         }
-        
+
         @keyframes checkmark {
-            0% { transform: scale(0) rotate(0deg); opacity: 0; }
-            50% { transform: scale(1.2) rotate(10deg); opacity: 1; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2) rotate(10deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
         }
-        
+
         .checkmark-animation {
             animation: checkmark 0.5s ease-out;
         }
-        
+
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-            20%, 40%, 60%, 80% { transform: translateX(10px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-10px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(10px);
+            }
         }
-        
+
         .stroke-arrow {
             stroke-width: 1.5;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
             opacity: 0.4;
-            stroke-dasharray: 3,3;
+            stroke-dasharray: 3, 3;
         }
-        
+
         .stroke-number-circle {
             opacity: 0.6;
         }
-        
+
         .stroke-number-text {
             font-size: 5px;
             font-weight: bold;
             fill: white;
         }
-        
+
         .arrow-head {
             opacity: 0.5;
         }
-        
+
         /* Ensure stroke order SVG doesn't block touches */
         #strokeOrderSvg {
             pointer-events: none;
         }
-        
+
         #strokeOrderSvg * {
             pointer-events: none;
         }
-        
+
         .app-container {
             display: flex;
             flex-direction: column;
@@ -337,35 +401,172 @@
             width: 100%;
             overflow: hidden;
         }
-        
+
         .theme-text {
             transition: color 0.3s ease;
         }
-        
+
         .heading-text {
-            color: #1f2937; /* dark gray for light mode */
+            color: #1f2937;
+            /* dark gray for light mode */
             transition: color 0.3s ease;
         }
-        
+
         body.dark-mode .heading-text {
-            color: #ffffff; /* white for dark mode */
+            color: #ffffff;
+            /* white for dark mode */
         }
-        
+
         .theme-bg {
             transition: background-color 0.3s ease;
         }
-        
+
+        /* Character Management Modal */
+        .char-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .char-modal-overlay.show {
+            display: flex;
+        }
+
+        .char-modal {
+            background: white;
+            border-radius: 1rem;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 800px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .char-modal-header {
+            padding: 1.5rem;
+            border-bottom: 2px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .char-modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .char-section-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .char-tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .char-tab:hover {
+            color: #374151;
+            background: #f3f4f6;
+        }
+
+        .char-tab.active {
+            color: #6366f1;
+            border-bottom-color: #6366f1;
+        }
+
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .char-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .char-card:hover {
+            border-color: #6366f1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .char-card.learned {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .char-card-hiragana {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .char-card-romaji {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.75rem;
+        }
+
+        .char-card-checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: #374151;
+        }
+
+        .char-card-checkbox input[type="checkbox"] {
+            width: 1rem;
+            height: 1rem;
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
             .character-display {
                 font-size: 3rem;
             }
+
+            .char-modal {
+                max-width: 95vw;
+                max-height: 95vh;
+            }
+
+            .char-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
         }
     </style>
 </head>
+
 <body class="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100">
     <!-- Floating fullscreen button -->
     <button id="fullscreenBtn" class="show" title="Enter Fullscreen">⛶</button>
-    
+
     <!-- Splash screen (mobile only) -->
     <div class="splash-screen">
         <div class="top-section">
@@ -376,53 +577,109 @@
             <div class="arrow">↑</div>
         </div>
     </div>
-    
+
     <div class="app-container">
         <!-- Header -->
         <header class="text-center py-1 px-4 fade-in relative">
-            <!-- Theme Controls -->
+            <!-- Left Side Controls -->
+            <div class="absolute top-1 left-1 md:top-3 md:left-3 flex gap-2">
+                <!-- Burger Menu (auth-only) -->
+                <button id="burgerMenuBtn"
+                    class="hidden flex items-center justify-center gap-2 px-2 py-1.5 md:px-3 md:py-2 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all"
+                    title="Menu">
+                    <span class="text-base md:text-lg">☰</span>
+                </button>
+
+                <!-- Sign In Button (shown when not authenticated) -->
+                <button id="signInBtn"
+                    class="px-3 py-1.5 md:px-4 md:py-2 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all flex items-center gap-2 text-xs md:text-sm font-semibold"
+                    title="Sign in with Google">
+                    <span>🔐</span>
+                    <span class="hidden md:inline">Sign In</span>
+                </button>
+
+                <!-- User Profile (shown when authenticated) -->
+                <div id="userProfile" class="hidden relative">
+                    <button id="userProfileBtn"
+                        class="flex items-center gap-2 px-2 py-1.5 md:px-3 md:py-2 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all">
+                        <img id="userAvatar" src="" alt="User" class="w-6 h-6 rounded-full">
+                        <span id="userName"
+                            class="hidden md:inline text-xs md:text-sm font-semibold max-w-[120px] truncate"></span>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div id="authDropdown"
+                        class="hidden absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 min-w-[200px] z-50">
+                        <div class="p-3 border-b border-gray-200">
+                            <div class="text-sm font-semibold text-gray-900" id="userNameFull"></div>
+                            <div class="text-xs text-gray-500" id="userEmail"></div>
+                        </div>
+                        <div class="p-2">
+                            <button id="signOutBtn"
+                                class="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md transition-colors">
+                                Sign Out
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Theme Controls (Right) -->
             <div class="absolute top-1 right-1 md:top-3 md:right-3 flex gap-2">
-                <button id="darkModeBtn" class="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all flex items-center justify-center text-base md:text-lg" title="Toggle Dark Mode">
+                <button id="darkModeBtn"
+                    class="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all flex items-center justify-center text-base md:text-lg"
+                    title="Toggle Dark Mode">
                     🌙
                 </button>
-                <button id="themeMenuBtn" class="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all flex items-center justify-center text-base md:text-lg" title="Change Theme">
+                <button id="themeMenuBtn"
+                    class="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white/50 hover:bg-white/80 backdrop-blur-sm shadow-md transition-all flex items-center justify-center text-base md:text-lg"
+                    title="Change Theme">
                     🎨
                 </button>
             </div>
-            
+
             <!-- Theme Selector Dropdown -->
-            <div id="themeMenu" class="hidden absolute top-14 right-3 bg-white rounded-xl shadow-2xl p-3 z-50 min-w-[160px]">
+            <div id="themeMenu"
+                class="hidden absolute top-14 right-3 bg-white rounded-xl shadow-2xl p-3 z-50 min-w-[160px]">
                 <div class="text-xs font-bold text-gray-600 mb-2">Choose Theme</div>
                 <div id="themeList" class="flex flex-col gap-1"></div>
             </div>
-            
+
             <h1 class="text-xl md:text-2xl font-bold heading-text mb-1">ひらがな Practice</h1>
             <!-- Progress Bars -->
             <div class="max-w-md mx-auto">
-                <div class="flex justify-between items-center mb-1">
-                    <span class="text-xs font-semibold text-gray-700">Progress</span>
-                    <span class="text-xs font-semibold text-purple-600" id="progressText">0 / 71</span>
-                </div>
                 <div class="flex gap-2 w-full">
                     <!-- Basic Hiragana Progress -->
                     <div class="flex-[46] relative">
-                        <div class="text-[10px] font-semibold text-gray-600 mb-0.5">Basic (46)</div>
-                        <div id="progressBar1Container" class="w-full bg-gray-200 rounded-full h-2 overflow-hidden cursor-pointer hover:h-3 transition-all">
-                            <div id="progressBar1" class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500 pointer-events-none" style="width: 0%"></div>
+                        <div id="progressLabel1" class="text-[10px] font-semibold text-gray-600 mb-0.5">Basic (46)</div>
+                        <div id="progressBar1Container"
+                            class="w-full bg-gray-200 rounded-full h-2 overflow-hidden cursor-pointer hover:h-3 transition-all">
+                            <div id="progressBar1"
+                                class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500 pointer-events-none"
+                                style="width: 0%"></div>
                         </div>
                     </div>
                     <!-- Dakuten Progress -->
                     <div class="flex-[20] relative">
-                        <div class="text-[10px] font-semibold text-gray-600 mb-0.5">Dakuten (20)</div>
-                        <div id="progressBar2Container" class="w-full bg-gray-200 rounded-full h-2 overflow-hidden cursor-pointer hover:h-3 transition-all">
-                            <div id="progressBar2" class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500 pointer-events-none" style="width: 0%"></div>
+                        <div id="progressLabel2" class="text-[10px] font-semibold text-gray-600 mb-0.5">Dakuten (20)
+                        </div>
+                        <div id="progressBar2Container"
+                            class="w-full bg-gray-200 rounded-full h-2 overflow-hidden cursor-pointer hover:h-3 transition-all">
+                            <div id="progressBar2"
+                                class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500 pointer-events-none"
+                                style="width: 0%"></div>
                         </div>
                     </div>
                     <!-- Handakuten Progress -->
                     <div class="flex-[12] relative">
-                        <div class="text-[9px] font-semibold text-gray-600 mb-0.5 whitespace-nowrap">Handakuten (5)</div>
-                        <div id="progressBar3Container" class="w-full bg-gray-200 rounded-full h-2 overflow-hidden cursor-pointer hover:h-3 transition-all">
-                            <div id="progressBar3" class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500 pointer-events-none" style="width: 0%"></div>
+                        <div id="progressLabel3"
+                            class="text-[9px] font-semibold text-gray-600 mb-0.5 whitespace-nowrap">Handakuten (5)
+                        </div>
+                        <div id="progressBar3Container"
+                            class="w-full bg-gray-200 rounded-full h-2 overflow-hidden cursor-pointer hover:h-3 transition-all">
+                            <div id="progressBar3"
+                                class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500 pointer-events-none"
+                                style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
@@ -435,11 +692,17 @@
             <div class="text-center mb-0 md:mb-1">
                 <div class="flex items-center justify-center gap-3">
                     <div class="character-display" id="characterDisplay">あ</div>
-                    <div class="flex flex-col items-start">
+                    <div class="flex flex-col items-start gap-1">
                         <div class="text-lg font-semibold text-gray-700" id="romajiDisplay">a</div>
-                        <div class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full text-[10px] font-semibold whitespace-nowrap">
+                        <div
+                            class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full text-[10px] font-semibold whitespace-nowrap">
                             <span id="currentIndex">1</span>/<span id="totalChars">71</span>
                         </div>
+                        <!-- Quick Learned Checkbox -->
+                        <label id="quickLearnedContainer" class="hidden flex items-center gap-1 cursor-pointer text-xs">
+                            <input type="checkbox" id="quickLearnedCheckbox" class="w-4 h-4 cursor-pointer">
+                            <span class="font-semibold text-gray-700">Learned</span>
+                        </label>
                     </div>
                     <div id="successCheck" class="hidden text-5xl text-green-500">✓</div>
                 </div>
@@ -449,20 +712,18 @@
             <div class="flex-1 relative flex items-center justify-center mb-0 md:mb-1">
                 <div class="relative w-full max-w-full md:max-w-sm aspect-square">
                     <div class="absolute inset-0 bg-gray-50 rounded-2xl border-4 border-dashed border-gray-300">
-                        <canvas 
-                            id="drawingCanvas" 
-                            width="500" 
-                            height="500"
-                            class="w-full h-full bg-white rounded-xl"
-                        ></canvas>
+                        <canvas id="drawingCanvas" width="500" height="500"
+                            class="w-full h-full bg-white rounded-xl"></canvas>
                     </div>
                     <!-- Reference Character Overlay (faded) -->
                     <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div id="referenceCharacter" class="text-[18rem] opacity-5 text-purple-500" style="line-height: 1;">あ</div>
+                        <div id="referenceCharacter" class="text-[18rem] opacity-5 text-purple-500"
+                            style="line-height: 1;">あ</div>
                     </div>
                     <!-- Stroke Order Overlay -->
                     <div class="absolute inset-0 pointer-events-none">
-                        <svg id="strokeOrderSvg" class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+                        <svg id="strokeOrderSvg" class="w-full h-full" viewBox="0 0 100 100"
+                            preserveAspectRatio="xMidYMid meet"></svg>
                     </div>
                 </div>
             </div>
@@ -471,37 +732,28 @@
             <div class="flex flex-col gap-2 px-4 pb-2">
                 <!-- Button row -->
                 <div class="flex justify-center items-center gap-2">
-                    <button 
-                        id="prevBtn"
-                        class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 text-sm"
-                    >
+                    <button id="prevBtn"
+                        class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 text-sm">
                         ← Prev
                     </button>
-                    <button 
-                        id="clearBtn"
-                        class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 text-sm"
-                    >
+                    <button id="clearBtn"
+                        class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 text-sm">
                         Clear
                     </button>
-                    <button 
-                        id="nextBtn"
-                        class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-4 py-2 rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 text-sm"
-                    >
+                    <button id="nextBtn"
+                        class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-4 py-2 rounded-lg shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 text-sm">
                         Next →
                     </button>
                 </div>
-                
+
                 <!-- Options row -->
                 <div class="flex justify-center items-center gap-4">
                     <label class="flex items-center gap-2">
                         <input type="checkbox" id="showStrokeOrder" checked class="w-4 h-4">
                         <span class="text-xs font-semibold text-gray-700">Stroke Order</span>
                     </label>
-                    <a 
-                        href="https://paypal.me/AndrewJamesNapier" 
-                        target="_blank"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded-lg shadow transition-all duration-200 hover:scale-105 text-xs flex items-center gap-1"
-                    >
+                    <a href="https://paypal.me/AndrewJamesNapier" target="_blank"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-3 py-1 rounded-lg shadow transition-all duration-200 hover:scale-105 text-xs flex items-center gap-1">
                         ☕ Support
                     </a>
                 </div>
@@ -509,8 +761,35 @@
         </div>
     </div>
 
+    <!-- Character Management Modal -->
+    <div id="charModal" class="char-modal-overlay">
+        <div class="char-modal">
+            <div class="char-modal-header">
+                <h2 class="text-xl md:text-2xl font-bold heading-text">Manage Characters</h2>
+                <button id="closeCharModal" class="text-2xl text-gray-500 hover:text-gray-700 transition-colors">
+                    ✕
+                </button>
+            </div>
+            <div class="char-modal-body">
+                <!-- Section Tabs -->
+                <div class="char-section-tabs">
+                    <button class="char-tab active" data-section="basic">Basic (46)</button>
+                    <button class="char-tab" data-section="dakuten">Dakuten (20)</button>
+                    <button class="char-tab" data-section="handakuten">Handakuten (5)</button>
+                </div>
+
+                <!-- Character Grids -->
+                <div id="charGridBasic" class="char-grid"></div>
+                <div id="charGridDakuten" class="char-grid" style="display: none;"></div>
+                <div id="charGridHandakuten" class="char-grid" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="stroke-order.js"></script>
     <script src="themes.js"></script>
+    <script type="module" src="auth.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
