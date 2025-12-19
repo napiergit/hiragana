@@ -1,22 +1,11 @@
 // Firebase Authentication Manager
 // Handles Google Sign-In, user state, and Firestore sync
 
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import {
-    getAuth,
-    signInWithPopup,
-    GoogleAuthProvider,
-    signOut as firebaseSignOut,
-    onAuthStateChanged
-} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    serverTimestamp
-} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 import firebaseConfig from './firebase-config.js';
+
+// Dynamic import variables
+let initializeApp, getAuth, signInWithPopup, GoogleAuthProvider, firebaseSignOut, onAuthStateChanged;
+let getFirestore, doc, getDoc, setDoc, serverTimestamp;
 
 class AuthManager {
     constructor() {
@@ -43,6 +32,37 @@ class AuthManager {
             if (!firebaseConfig.apiKey || firebaseConfig.apiKey === 'YOUR_API_KEY_HERE') {
                 console.warn('⚠️ Firebase not configured. Using localStorage only.');
                 this.isInitialized = false;
+                return;
+            }
+
+            // Check if online before trying to load Firebase
+            if (!navigator.onLine) {
+                console.log('📡 Offline mode detected. Skipping Firebase initialization.');
+                this.updateAuthUI(false); // Ensure UI reflects offline/guest state
+                return;
+            }
+
+            // Dynamic imports for Firebase SDKs
+            try {
+                const firebaseAppModule = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
+                initializeApp = firebaseAppModule.initializeApp;
+
+                const firebaseAuthModule = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+                getAuth = firebaseAuthModule.getAuth;
+                signInWithPopup = firebaseAuthModule.signInWithPopup;
+                GoogleAuthProvider = firebaseAuthModule.GoogleAuthProvider;
+                firebaseSignOut = firebaseAuthModule.signOut;
+                onAuthStateChanged = firebaseAuthModule.onAuthStateChanged;
+
+                const firebaseFirestoreModule = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+                getFirestore = firebaseFirestoreModule.getFirestore;
+                doc = firebaseFirestoreModule.doc;
+                getDoc = firebaseFirestoreModule.getDoc;
+                setDoc = firebaseFirestoreModule.setDoc;
+                serverTimestamp = firebaseFirestoreModule.serverTimestamp;
+
+            } catch (importError) {
+                console.warn('⚠️ Could not load Firebase modules (likely offline).', importError);
                 return;
             }
 
@@ -135,7 +155,11 @@ class AuthManager {
 
     async signInWithGoogle() {
         if (!this.isInitialized) {
-            alert('Firebase is not configured. Please add your Firebase config to firebase-config.js');
+            if (!navigator.onLine) {
+                alert('You are currently offline. Please connect to the internet to sign in.');
+            } else {
+                alert('Firebase is not configured or failed to load. Please refresh the page.');
+            }
             return;
         }
 
