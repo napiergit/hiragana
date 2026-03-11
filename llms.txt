@@ -1,0 +1,8 @@
+# Learn Hiragana
+
+A free, interactive web application to practice Japanese Hiragana writing.
+
+- **URL:** https://hiragana.site/
+- **Description:** Master hiragana with our free interactive app. Practice Japanese writing with stroke order guides, instant feedback, and beautiful themes. Perfect for beginners learning Japanese.
+- **Features:** Stroke order guides, Interactive drawing canvas, Progress tracking, Multiple themes, Dark mode, Mobile optimized.
+- **Author:** Andrew James Napier
